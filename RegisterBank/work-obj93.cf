@@ -1,0 +1,7 @@
+v 4
+file . "Register16Bits_tb.vhd" "b769ace5b2d9558e03639eaface66417094e7b02" "20241110220630.258":
+  entity register16bits_tb at 1( 0) + 4 on 37;
+  architecture a_register16bits_tb of register16bits_tb at 8( 138) + 4 on 38;
+file . "Register16Bits.vhd" "43a13b5f8c9fc35db52ab7e63c996542cca50bbe" "20241110220627.190":
+  entity register16bits at 1( 0) + 0 on 35;
+  architecture a_register16bits of register16bits at 14( 321) + 0 on 36;
