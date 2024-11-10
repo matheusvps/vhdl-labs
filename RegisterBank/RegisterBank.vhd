@@ -1,7 +1,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.numeric_std.all;
+
 
 -- 
 -- Numero de registradores: 9
@@ -15,12 +16,12 @@ entity RegisterBank is
         data_wr : in  STD_LOGIC_VECTOR(15 downto 0); -- Dado a ser escrito
         reg_wr  : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para escrita
         reg_r   : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para leitura
-        data_r  : out STD_LOGIC_VECTOR(15 downto 0); -- Dado lido do registrador selecionado
+        data_r  : out STD_LOGIC_VECTOR(15 downto 0) -- Dado lido do registrador selecionado
     );
 end RegisterBank;
 
 architecture a_RegisterBank of RegisterBank is
-    component Register
+    component Register16Bits
         Port (
             clock    : in  STD_LOGIC;
             rst      : in  STD_LOGIC;
@@ -30,76 +31,79 @@ architecture a_RegisterBank of RegisterBank is
         );
     end component;
 
+    type std_logic_vector_array is array (natural range <>) of STD_LOGIC_VECTOR;
+    type std_logic_array is array (natural range <>) of STD_LOGIC;
+
     -- Sinais de controle e dados dos registradores
-    signal registers_data   : array (8 downto 0) of STD_LOGIC_VECTOR(15 downto 0);
-    signal write_en_signals : array (8 downto 0) of STD_LOGIC := (others => '0');
+    signal registers_data   : std_logic_vector_array(8 downto 0)(15 downto 0);
+    signal write_en_signals : std_logic_array(8 downto 0) := (others => '0');
     
 begin
     -- Instanciando os registradores
-    reg_0 : Register port map (
+    reg_0 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(0),
                                     data_in => data_wr,
                                     data_out => registers_data(0)
                                  );
-    reg_1 : Register port map (
+    reg_1 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(1),
                                     data_in => data_wr,
                                     data_out => registers_data(1)
                                  );
-    reg_2 : Register port map (
+    reg_2 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(2),
                                     data_in => data_wr,
                                     data_out => registers_data(2)
                                  );
-    reg_3 : Register port map (
+    reg_3 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(3),
                                     data_in => data_wr,
                                     data_out => registers_data(3)
                                  );
-    reg_4 : Register port map (
+    reg_4 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(4),
                                     data_in => data_wr,
                                     data_out => registers_data(4)
                                  );
-    reg_5 : Register port map (
+    reg_5 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(5),
                                     data_in => data_wr,
                                     data_out => registers_data(5)
                                  );
-    reg_6 : Register port map (
+    reg_6 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(6),
                                     data_in => data_wr,
                                     data_out => registers_data(6)
                                  );
-    reg_7 : Register port map (
+    reg_7 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(7),
                                     data_in => data_wr,
                                     data_out => registers_data(7)
                                  );
-    reg_8 : Register port map (
+    reg_8 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(8),
                                     data_in => data_wr,
                                     data_out => registers_data(8)
                                  );
-    reg_9 : Register port map (
+    reg_9 : Register16Bits port map (
                                     clock => clock,
                                     rst => rst,
                                     wr_en => write_en_signals(9),
