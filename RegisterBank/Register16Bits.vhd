@@ -3,22 +3,22 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Register16bits is
-   port( clk      : in std_logic;
+   port( clock      : in std_logic;
          rst      : in std_logic;
          wr_en    : in std_logic;
-         data_in  : in unsigned(15 downto 0);
-         data_out : out unsigned(15 downto 0)
+         data_in  : in std_logic_vector(15 downto 0);
+         data_out : out std_logic_vector(15 downto 0)
    );
 end entity;
 
 architecture a_Register16bits of Register16bits is
-   signal registro: unsigned(15 downto 0);
+   signal registro: std_logic_vector(15 downto 0);
 begin
-   process(clk,rst) 
+   process(clock,rst) 
    begin                
       if rst='1' then
          registro <= (others => '0');
-      elsif rising_edge(clk) then
+      elsif rising_edge(clock) then
          if wr_en='1' then
             registro <= data_in;
          end if;
