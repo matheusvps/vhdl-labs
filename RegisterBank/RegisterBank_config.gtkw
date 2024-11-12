@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Tue Nov 12 13:59:29 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\RegisterBank\RegisterBank_tb_wave.ghw"
+[dumpfile_mtime] "Tue Nov 12 13:51:48 2024"
+[dumpfile_size] 4421
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\RegisterBank\RegisterBank_config.gtkw"
+[timestart] 52200000
+[size] 1920 1009
+[pos] -243 -243
+*-25.195814 86500000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.registerbank_tb.
+[treeopen] top.registerbank_tb.uut.
+[treeopen] top.registerbank_tb.uut.reg_0.
+[sst_width] 274
+[signals_width] 198
+[sst_expanded] 1
+[sst_vpaned_height] 546
+@28
+top.registerbank_tb.finished
+top.registerbank_tb.wr_en
+top.registerbank_tb.rst
+top.registerbank_tb.clock
+@22
+#{top.registerbank_tb.data_r[15:0]} top.registerbank_tb.data_r[15] top.registerbank_tb.data_r[14] top.registerbank_tb.data_r[13] top.registerbank_tb.data_r[12] top.registerbank_tb.data_r[11] top.registerbank_tb.data_r[10] top.registerbank_tb.data_r[9] top.registerbank_tb.data_r[8] top.registerbank_tb.data_r[7] top.registerbank_tb.data_r[6] top.registerbank_tb.data_r[5] top.registerbank_tb.data_r[4] top.registerbank_tb.data_r[3] top.registerbank_tb.data_r[2] top.registerbank_tb.data_r[1] top.registerbank_tb.data_r[0]
+#{top.registerbank_tb.reg_r[4:0]} top.registerbank_tb.reg_r[4] top.registerbank_tb.reg_r[3] top.registerbank_tb.reg_r[2] top.registerbank_tb.reg_r[1] top.registerbank_tb.reg_r[0]
+#{top.registerbank_tb.reg_wr[4:0]} top.registerbank_tb.reg_wr[4] top.registerbank_tb.reg_wr[3] top.registerbank_tb.reg_wr[2] top.registerbank_tb.reg_wr[1] top.registerbank_tb.reg_wr[0]
+#{top.registerbank_tb.data_wr[15:0]} top.registerbank_tb.data_wr[15] top.registerbank_tb.data_wr[14] top.registerbank_tb.data_wr[13] top.registerbank_tb.data_wr[12] top.registerbank_tb.data_wr[11] top.registerbank_tb.data_wr[10] top.registerbank_tb.data_wr[9] top.registerbank_tb.data_wr[8] top.registerbank_tb.data_wr[7] top.registerbank_tb.data_wr[6] top.registerbank_tb.data_wr[5] top.registerbank_tb.data_wr[4] top.registerbank_tb.data_wr[3] top.registerbank_tb.data_wr[2] top.registerbank_tb.data_wr[1] top.registerbank_tb.data_wr[0]
+#{top.registerbank_tb.uut.reg_0.registro[15:0]} top.registerbank_tb.uut.reg_0.registro[15] top.registerbank_tb.uut.reg_0.registro[14] top.registerbank_tb.uut.reg_0.registro[13] top.registerbank_tb.uut.reg_0.registro[12] top.registerbank_tb.uut.reg_0.registro[11] top.registerbank_tb.uut.reg_0.registro[10] top.registerbank_tb.uut.reg_0.registro[9] top.registerbank_tb.uut.reg_0.registro[8] top.registerbank_tb.uut.reg_0.registro[7] top.registerbank_tb.uut.reg_0.registro[6] top.registerbank_tb.uut.reg_0.registro[5] top.registerbank_tb.uut.reg_0.registro[4] top.registerbank_tb.uut.reg_0.registro[3] top.registerbank_tb.uut.reg_0.registro[2] top.registerbank_tb.uut.reg_0.registro[1] top.registerbank_tb.uut.reg_0.registro[0]
+#{top.registerbank_tb.uut.reg_0.data_in[15:0]} top.registerbank_tb.uut.reg_0.data_in[15] top.registerbank_tb.uut.reg_0.data_in[14] top.registerbank_tb.uut.reg_0.data_in[13] top.registerbank_tb.uut.reg_0.data_in[12] top.registerbank_tb.uut.reg_0.data_in[11] top.registerbank_tb.uut.reg_0.data_in[10] top.registerbank_tb.uut.reg_0.data_in[9] top.registerbank_tb.uut.reg_0.data_in[8] top.registerbank_tb.uut.reg_0.data_in[7] top.registerbank_tb.uut.reg_0.data_in[6] top.registerbank_tb.uut.reg_0.data_in[5] top.registerbank_tb.uut.reg_0.data_in[4] top.registerbank_tb.uut.reg_0.data_in[3] top.registerbank_tb.uut.reg_0.data_in[2] top.registerbank_tb.uut.reg_0.data_in[1] top.registerbank_tb.uut.reg_0.data_in[0]
+#{top.registerbank_tb.uut.register_data_0[15:0]} top.registerbank_tb.uut.register_data_0[15] top.registerbank_tb.uut.register_data_0[14] top.registerbank_tb.uut.register_data_0[13] top.registerbank_tb.uut.register_data_0[12] top.registerbank_tb.uut.register_data_0[11] top.registerbank_tb.uut.register_data_0[10] top.registerbank_tb.uut.register_data_0[9] top.registerbank_tb.uut.register_data_0[8] top.registerbank_tb.uut.register_data_0[7] top.registerbank_tb.uut.register_data_0[6] top.registerbank_tb.uut.register_data_0[5] top.registerbank_tb.uut.register_data_0[4] top.registerbank_tb.uut.register_data_0[3] top.registerbank_tb.uut.register_data_0[2] top.registerbank_tb.uut.register_data_0[1] top.registerbank_tb.uut.register_data_0[0]
+@28
+top.registerbank_tb.uut.write_en_0
+[pattern_trace] 1
+[pattern_trace] 0

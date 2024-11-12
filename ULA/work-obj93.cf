@@ -1,7 +1,0 @@
-v 4
-file . "ULA.vhd" "c681d5804c65e533ccb088f4d425135b4ec9aa12" "20241106210242.609":
-  entity ula at 1( 0) + 0 on 63;
-  architecture func of ula at 27( 599) + 0 on 64;
-file . "ULA_tb.vhd" "bfeab3d7f0a07e181791aa077bf3db558a850b0d" "20241106210242.755":
-  entity ula_tb at 1( 0) + 0 on 65;
-  architecture func of ula_tb at 7( 99) + 0 on 66;

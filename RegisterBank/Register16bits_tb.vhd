@@ -7,11 +7,11 @@
 
     architecture a_Register16Bits_tb of Register16Bits_tb is
         component Register16Bits port(
-            clk      : in std_logic;
+            clock      : in std_logic;
             rst      : in std_logic;
             wr_en    : in std_logic;
-            data_in  : in unsigned(15 downto 0);
-            data_out : out unsigned(15 downto 0)
+            data_in  : in STD_LOGIC_VECTOR(15 downto 0);
+            data_out : out STD_LOGIC_VECTOR(15 downto 0)
         );
         end component;
                                 
@@ -20,11 +20,11 @@
     signal   clk         : std_logic := '0';
     signal   rst         : std_logic := '0';
     signal   wr_en       : std_logic := '0';
-    signal   data_in     : unsigned(15 downto 0) := (others => '0');
-    signal   data_out    : unsigned(15 downto 0);
+    signal   data_in     : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal   data_out    : STD_LOGIC_VECTOR(15 downto 0);
     begin
     uut: Register16Bits port map (    
-                                        clk      => clk,
+                                        clock      => clk,
                                         rst      => rst,
                                         wr_en    => wr_en,
                                         data_in  => data_in,

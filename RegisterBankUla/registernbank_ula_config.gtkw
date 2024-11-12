@@ -1,0 +1,42 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Tue Nov 12 13:51:21 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\RegisterBankUla\Connection_tb_wave.ghw"
+[dumpfile_mtime] "Tue Nov 12 13:36:27 2024"
+[dumpfile_size] 10719
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\RegisterBankUla\registernbank_ula_config.gtkw"
+[timestart] 50800000
+[size] 1920 1009
+[pos] -165 -1245
+*-24.717491 75000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.connection_tb.
+[treeopen] top.connection_tb.uut.
+[treeopen] top.connection_tb.uut.reg_bank.
+[treeopen] top.connection_tb.uut.reg_bank.reg_0.
+[sst_width] 362
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@28
+top.connection_tb.carry_flag
+top.connection_tb.zero_flag
+top.connection_tb.wr_en
+top.connection_tb.rst
+top.connection_tb.clock
+#{top.connection_tb.opcode[2:0]} top.connection_tb.opcode[2] top.connection_tb.opcode[1] top.connection_tb.opcode[0]
+@22
+#{top.connection_tb.reg_sel_wr[4:0]} top.connection_tb.reg_sel_wr[4] top.connection_tb.reg_sel_wr[3] top.connection_tb.reg_sel_wr[2] top.connection_tb.reg_sel_wr[1] top.connection_tb.reg_sel_wr[0]
+#{top.connection_tb.data_in[15:0]} top.connection_tb.data_in[15] top.connection_tb.data_in[14] top.connection_tb.data_in[13] top.connection_tb.data_in[12] top.connection_tb.data_in[11] top.connection_tb.data_in[10] top.connection_tb.data_in[9] top.connection_tb.data_in[8] top.connection_tb.data_in[7] top.connection_tb.data_in[6] top.connection_tb.data_in[5] top.connection_tb.data_in[4] top.connection_tb.data_in[3] top.connection_tb.data_in[2] top.connection_tb.data_in[1] top.connection_tb.data_in[0]
+#{top.connection_tb.reg_sel_rd[4:0]} top.connection_tb.reg_sel_rd[4] top.connection_tb.reg_sel_rd[3] top.connection_tb.reg_sel_rd[2] top.connection_tb.reg_sel_rd[1] top.connection_tb.reg_sel_rd[0]
+#{top.connection_tb.data_out[15:0]} top.connection_tb.data_out[15] top.connection_tb.data_out[14] top.connection_tb.data_out[13] top.connection_tb.data_out[12] top.connection_tb.data_out[11] top.connection_tb.data_out[10] top.connection_tb.data_out[9] top.connection_tb.data_out[8] top.connection_tb.data_out[7] top.connection_tb.data_out[6] top.connection_tb.data_out[5] top.connection_tb.data_out[4] top.connection_tb.data_out[3] top.connection_tb.data_out[2] top.connection_tb.data_out[1] top.connection_tb.data_out[0]
+#{top.connection_tb.uut.reg_bank.reg_0.registro[15:0]} top.connection_tb.uut.reg_bank.reg_0.registro[15] top.connection_tb.uut.reg_bank.reg_0.registro[14] top.connection_tb.uut.reg_bank.reg_0.registro[13] top.connection_tb.uut.reg_bank.reg_0.registro[12] top.connection_tb.uut.reg_bank.reg_0.registro[11] top.connection_tb.uut.reg_bank.reg_0.registro[10] top.connection_tb.uut.reg_bank.reg_0.registro[9] top.connection_tb.uut.reg_bank.reg_0.registro[8] top.connection_tb.uut.reg_bank.reg_0.registro[7] top.connection_tb.uut.reg_bank.reg_0.registro[6] top.connection_tb.uut.reg_bank.reg_0.registro[5] top.connection_tb.uut.reg_bank.reg_0.registro[4] top.connection_tb.uut.reg_bank.reg_0.registro[3] top.connection_tb.uut.reg_bank.reg_0.registro[2] top.connection_tb.uut.reg_bank.reg_0.registro[1] top.connection_tb.uut.reg_bank.reg_0.registro[0]
+#{top.connection_tb.uut.reg_bank.reg_0.data_in[15:0]} top.connection_tb.uut.reg_bank.reg_0.data_in[15] top.connection_tb.uut.reg_bank.reg_0.data_in[14] top.connection_tb.uut.reg_bank.reg_0.data_in[13] top.connection_tb.uut.reg_bank.reg_0.data_in[12] top.connection_tb.uut.reg_bank.reg_0.data_in[11] top.connection_tb.uut.reg_bank.reg_0.data_in[10] top.connection_tb.uut.reg_bank.reg_0.data_in[9] top.connection_tb.uut.reg_bank.reg_0.data_in[8] top.connection_tb.uut.reg_bank.reg_0.data_in[7] top.connection_tb.uut.reg_bank.reg_0.data_in[6] top.connection_tb.uut.reg_bank.reg_0.data_in[5] top.connection_tb.uut.reg_bank.reg_0.data_in[4] top.connection_tb.uut.reg_bank.reg_0.data_in[3] top.connection_tb.uut.reg_bank.reg_0.data_in[2] top.connection_tb.uut.reg_bank.reg_0.data_in[1] top.connection_tb.uut.reg_bank.reg_0.data_in[0]
+@28
+top.connection_tb.uut.reg_bank.write_en_0
+top.connection_tb.uut.reg_bank.wr_en
+@22
+#{top.connection_tb.uut.reg_bank.reg_0.data_out[15:0]} top.connection_tb.uut.reg_bank.reg_0.data_out[15] top.connection_tb.uut.reg_bank.reg_0.data_out[14] top.connection_tb.uut.reg_bank.reg_0.data_out[13] top.connection_tb.uut.reg_bank.reg_0.data_out[12] top.connection_tb.uut.reg_bank.reg_0.data_out[11] top.connection_tb.uut.reg_bank.reg_0.data_out[10] top.connection_tb.uut.reg_bank.reg_0.data_out[9] top.connection_tb.uut.reg_bank.reg_0.data_out[8] top.connection_tb.uut.reg_bank.reg_0.data_out[7] top.connection_tb.uut.reg_bank.reg_0.data_out[6] top.connection_tb.uut.reg_bank.reg_0.data_out[5] top.connection_tb.uut.reg_bank.reg_0.data_out[4] top.connection_tb.uut.reg_bank.reg_0.data_out[3] top.connection_tb.uut.reg_bank.reg_0.data_out[2] top.connection_tb.uut.reg_bank.reg_0.data_out[1] top.connection_tb.uut.reg_bank.reg_0.data_out[0]
+[pattern_trace] 1
+[pattern_trace] 0

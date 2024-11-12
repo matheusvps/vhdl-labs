@@ -42,9 +42,9 @@ begin
     clk_proc: process
     begin                       -- gera clock até que sim_time_proc termine
         while finished /= '1' loop
-            clock <= '0';
-            wait for period_time/2;
             clock <= '1';
+            wait for period_time/2;
+            clock <= '0';
             wait for period_time/2;
         end loop;
         wait;
@@ -65,13 +65,13 @@ begin
         wait for 20 ns;
         
         rst <= '0';
-        wait for 20 ns;
+        wait for 15 ns;
         
         -- Escreve 4 no registrador 0
-        wr_en <= '1';
         data_wr <= "0000000000000100";
         reg_wr <= "00000";
-        wait for 20 ns;
+        wr_en <= '1';
+        wait for 25 ns;
         
         -- Lê o registrador 0
         wr_en <= '0';

@@ -25,8 +25,7 @@ entity ULA is
 end entity;
 
 architecture func of ULA is
-    signal extendedA, extendedB, resultSoma, resultSub, resultAnd, resultXor, resultTmp: unsigned(16 downto 0);
-    signal resultLSL, resultLSR: unsigned(15 downto 0);
+    signal extendedA, extendedB, resultSoma, resultSub, resultAnd, resultXor, resultTmp, resultLSL, resultLSR: unsigned(16 downto 0);
 
     begin
 
@@ -47,8 +46,8 @@ architecture func of ULA is
     resultXor <= '0' & (A xor B);
 
     --  Operações de Logical Shift  --
-    resultLSL <= A sll to_integer(B);
-    resultLSR <= A srl to_integer(B);
+    resultLSL <= '0' & (A sll to_integer(B));
+    resultLSR <= '0' & (A srl to_integer(B));
     
 
     --  MUX para definir a saída  --

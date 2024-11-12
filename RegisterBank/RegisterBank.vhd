@@ -30,15 +30,15 @@ architecture a_RegisterBank of RegisterBank is
     end component;
 
     -- Sinais de controle e dados dos registradores
-    signal register_data_0  : std_logic_vector(15 downto 0);
-    signal register_data_1  : std_logic_vector(15 downto 0);
-    signal register_data_2  : std_logic_vector(15 downto 0);
-    signal register_data_3  : std_logic_vector(15 downto 0);
-    signal register_data_4  : std_logic_vector(15 downto 0);
-    signal register_data_5  : std_logic_vector(15 downto 0);
-    signal register_data_6  : std_logic_vector(15 downto 0);
-    signal register_data_7  : std_logic_vector(15 downto 0);
-    signal register_data_8  : std_logic_vector(15 downto 0);
+    signal register_data_0  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_1  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_2  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_3  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_4  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_5  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_6  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_7  : STD_LOGIC_VECTOR(15 downto 0);
+    signal register_data_8  : STD_LOGIC_VECTOR(15 downto 0);
 
     signal write_en_0 : std_logic := '0';
     signal write_en_1 : std_logic := '0';
@@ -117,76 +117,25 @@ begin
                                  );
 
     -- Process para definir o registrador de escrita
-    process(clock)
-    begin
-        if rising_edge(clock) then
-            -- Seta os sinais de wr_en em '0'
-            write_en_0 <= '0';
-            write_en_1 <= '0';
-            write_en_2 <= '0';
-            write_en_3 <= '0';
-            write_en_4 <= '0';
-            write_en_5 <= '0';
-            write_en_6 <= '0';
-            write_en_7 <= '0';
-            write_en_8 <= '0';
-            
-            -- Habilita a escrita para o registrador selecionado
-            if wr_en = '1' then
-                case reg_wr is
-                    when "00000" =>
-                        write_en_0 <= '1';
-                    when "00001" =>
-                        write_en_1 <= '1';
-                    when "00010" =>
-                        write_en_2 <= '1';
-                    when "00011" =>
-                        write_en_3 <= '1';
-                    when "00100" =>
-                        write_en_4 <= '1';
-                    when "00101" =>
-                        write_en_5 <= '1';
-                    when "00110" =>
-                        write_en_6 <= '1';
-                    when "00111" =>
-                        write_en_7 <= '1';
-                    when "01000" =>
-                        write_en_8 <= '1';
-                    when others =>
-                        write_en_0 <= '0';
-                end case;
-            end if;
-        end if;
-    end process;
+    write_en_0 <= '1' when (wr_en = '1' and reg_wr = "00000") else '0';
+    write_en_1 <= '1' when (wr_en = '1' and reg_wr = "00001") else '0';
+    write_en_2 <= '1' when (wr_en = '1' and reg_wr = "00010") else '0';
+    write_en_3 <= '1' when (wr_en = '1' and reg_wr = "00011") else '0';
+    write_en_4 <= '1' when (wr_en = '1' and reg_wr = "00100") else '0';
+    write_en_5 <= '1' when (wr_en = '1' and reg_wr = "00101") else '0';
+    write_en_6 <= '1' when (wr_en = '1' and reg_wr = "00110") else '0';
+    write_en_7 <= '1' when (wr_en = '1' and reg_wr = "00111") else '0';
+    write_en_8 <= '1' when (wr_en = '1' and reg_wr = "01000") else '0';
 
-    -- Process para selecionar o registrador de leitura
-    process(clock)
-    begin
-        if rising_edge(clock) then
-            data_r <= (others => '0');
-            case reg_r is
-                when "00000" =>
-                    data_r <= register_data_0;
-                when "00001" =>
-                    data_r <= register_data_1;
-                when "00010" =>
-                    data_r <= register_data_2;
-                when "00011" =>
-                    data_r <= register_data_3;
-                when "00100" =>
-                    data_r <= register_data_4;
-                when "00101" =>
-                    data_r <= register_data_5;
-                when "00110" =>
-                    data_r <= register_data_6;
-                when "00111" =>
-                    data_r <= register_data_7;
-                when "01000" =>
-                    data_r <= register_data_8;
-                when others =>
-                    data_r <= (others => '1');
-            end case;
-        end if;
-    end process;
+    -- Seleciona o registrador de leitura
+    data_r <= register_data_0 when reg_r = "00000" else
+              register_data_1 when reg_r = "00001" else
+              register_data_2 when reg_r = "00010" else
+              register_data_3 when reg_r = "00011" else
+              register_data_4 when reg_r = "00100" else
+              register_data_5 when reg_r = "00101" else
+              register_data_6 when reg_r = "00110" else
+              register_data_7 when reg_r = "00111" else
+              register_data_8 when reg_r = "01000" else (others => '0');
 
 end architecture;
