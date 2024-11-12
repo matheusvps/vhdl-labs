@@ -4,16 +4,20 @@ use IEEE.numeric_std.ALL;
 
 entity Connection is
     Port (
-        clock       : in  STD_LOGIC;
-        rst         : in  STD_LOGIC;
-        wr_en_regs  : in  STD_LOGIC;
-        opcode      : in  STD_LOGIC_VECTOR(2 downto 0);
-        reg_sel_wr  : in  STD_LOGIC_VECTOR(4 downto 0);
-        reg_sel_rd  : in  STD_LOGIC_VECTOR(4 downto 0);
-        data_in_regs: in  STD_LOGIC_VECTOR(15 downto 0);
-        data_out    : out STD_LOGIC_VECTOR(15 downto 0);
-        zero_flag   : out STD_LOGIC;
-        carry_flag  : out STD_LOGIC
+        clock         : in  STD_LOGIC;
+        rst           : in  STD_LOGIC;
+        rst_accum     : in  STD_LOGIC;
+        wr_en_regs    : in  STD_LOGIC;
+        wr_en_accum   : in  STD_LOGIC;
+        opcode        : in  STD_LOGIC_VECTOR(2 downto 0);
+        reg_sel_wr    : in  STD_LOGIC_VECTOR(4 downto 0);
+        reg_sel_rd    : in  STD_LOGIC_VECTOR(4 downto 0);
+        data_in_regs  : in  STD_LOGIC_VECTOR(15 downto 0);
+        data_out_regs : out STD_LOGIC_VECTOR(15 downto 0);
+        accum_out     : out STD_LOGIC_VECTOR(15 downto 0);
+        ula_out     : out STD_LOGIC_VECTOR(15 downto 0);
+        zero_flag     : out STD_LOGIC;
+        carry_flag    : out STD_LOGIC
     );
 end Connection;
 
@@ -49,12 +53,10 @@ architecture a_Connection of Connection is
         );
     end component;
 
-    signal reg_data_in    : STD_LOGIC_VECTOR(15 downto 0);
     signal reg_data_out   : STD_LOGIC_VECTOR(15 downto 0);
+    signal accum_data_in  : STD_LOGIC_VECTOR(15 downto 0);
+    signal accum_data_out : STD_LOGIC_VECTOR(15 downto 0);
     signal ula_result     : UNSIGNED(15 downto 0);
-    signal accum          : UNSIGNED(15 downto 0);
-    signal ula_zero       : STD_LOGIC := '0';
-    signal ula_carry      : STD_LOGIC := '0';
 
 begin
 
@@ -71,33 +73,24 @@ begin
 
     connected_ula : ULA
         Port map (
-            A       => UNSIGNED(accum),
+            A       => UNSIGNED(accum_data_out),
             B       => UNSIGNED(reg_data_out),
             opcode  => UNSIGNED(opcode),
             Result  => ula_result,
-            Zero    => ula_zero,
-            Carry   => ula_carry
+            Zero    => zero_flag,
+            Carry   => carry_flag
         );
     accumulator : Register16Bits
         Port map (
             clock   => clock,
-            rst     => rst,
-            wr_en   => ,
-            data_in => STD_LOGIC_VECTOR(ula_result),
-            data_out=> 
+            rst     => rst_accum,
+            wr_en   => wr_en_accum,
+            data_in => accum_data_in,
+            data_out=> accum_data_out
         );
 
-    process(clock, rst)
-    begin
-        if rst = '1' then
-            accum <= (others => '0');
-        elsif rising_edge(clock) then
-            accum <= ula_result;
-        end if;
-    end process;
-
-    data_out   <= STD_LOGIC_VECTOR(accum);      
-    zero_flag  <= ula_zero; 
-    carry_flag <= ula_carry;
-
+    accum_data_in <= std_logic_vector(ula_result);
+    data_out_regs <= reg_data_out;
+    accum_out <= accum_data_out;
+    ula_out <= accum_data_in;
 end a_Connection;
