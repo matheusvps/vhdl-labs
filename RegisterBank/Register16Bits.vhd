@@ -12,16 +12,17 @@ entity Register16bits is
 end entity;
 
 architecture a_Register16bits of Register16bits is
+   signal registro: std_logic_vector(15 downto 0) := (others => '0');
 begin
    process(clock, rst, wr_en) 
    begin                
       if rst='1' then
-         data_out <= (others => '0');
+         registro <= (others => '0');
       elsif wr_en='1' then
          if rising_edge(clock) then
-            data_out <= data_in;
+            registro <= data_in;
          end if;
       end if;
    end process;
-   
+   data_out <= registro;
 end architecture;

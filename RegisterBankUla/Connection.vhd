@@ -15,7 +15,7 @@ entity Connection is
         data_in_regs  : in  STD_LOGIC_VECTOR(15 downto 0);
         data_out_regs : out STD_LOGIC_VECTOR(15 downto 0);
         accum_out     : out STD_LOGIC_VECTOR(15 downto 0);
-        ula_out     : out STD_LOGIC_VECTOR(15 downto 0);
+        ula_out       : out STD_LOGIC_VECTOR(15 downto 0);
         zero_flag     : out STD_LOGIC;
         carry_flag    : out STD_LOGIC
     );
@@ -35,8 +35,7 @@ architecture a_Connection of Connection is
     end component;
     component ULA
         Port (
-            A       : in  UNSIGNED(15 downto 0);
-            B       : in  UNSIGNED(15 downto 0);
+            A, B    : in  UNSIGNED(15 downto 0);
             opcode  : in  UNSIGNED(2 downto 0);
             Result  : out UNSIGNED(15 downto 0);
             Zero    : out STD_LOGIC;
@@ -54,7 +53,7 @@ architecture a_Connection of Connection is
     end component;
 
     signal reg_data_out   : STD_LOGIC_VECTOR(15 downto 0);
-    signal accum_data_in  : STD_LOGIC_VECTOR(15 downto 0);
+    signal accum_data_in  : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal accum_data_out : STD_LOGIC_VECTOR(15 downto 0);
     signal ula_result     : UNSIGNED(15 downto 0);
 
@@ -82,11 +81,11 @@ begin
         );
     accumulator : Register16Bits
         Port map (
-            clock   => clock,
-            rst     => rst_accum,
-            wr_en   => wr_en_accum,
-            data_in => accum_data_in,
-            data_out=> accum_data_out
+            clock    => clock,
+            rst      => rst_accum,
+            wr_en    => wr_en_accum,
+            data_in  => accum_data_in,
+            data_out => accum_data_out
         );
 
     accum_data_in <= std_logic_vector(ula_result);

@@ -26,20 +26,20 @@ architecture a_Connection_tb of Connection_tb is
     end component;
 
     constant period_time : time := 10 ns;
-    signal clock       : STD_LOGIC := '0';
-    signal rst,rst_accum: STD_LOGIC := '0';
-    signal wr_en_regs  : STD_LOGIC := '0';
-    signal wr_en_accum  : STD_LOGIC := '0';
-    signal opcode      : STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
-    signal reg_sel_wr  : STD_LOGIC_VECTOR(4 downto 0) := (others => '0'); -- Seleciona registrador de escrita
-    signal reg_sel_rd  : STD_LOGIC_VECTOR(4 downto 0) := (others => '0'); -- Seleciona registrador de leitura
-    signal data_in_regs: STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal data_out    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal accum_out    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal ula_out    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
-    signal zero_flag   : STD_LOGIC := '0';
-    signal carry_flag  : STD_LOGIC := '0';
-    signal finished    : STD_LOGIC := '0';
+    signal clock         : STD_LOGIC := '0';
+    signal rst,rst_accum : STD_LOGIC := '0';
+    signal wr_en_regs    : STD_LOGIC := '0';
+    signal wr_en_accum   : STD_LOGIC := '0';
+    signal opcode        : STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+    signal reg_sel_wr    : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+    signal reg_sel_rd    : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+    signal data_in_regs  : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal data_out      : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal accum_out     : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal ula_out       : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal zero_flag     : STD_LOGIC := '0';
+    signal carry_flag    : STD_LOGIC := '0';
+    signal finished      : STD_LOGIC := '0';
 
 begin
     uut : Connection port map (
@@ -138,13 +138,42 @@ begin
         reg_sel_rd <= "00010";
         wait for 10 ns;
         
+        -- ========= Reset the system ========= --
         wr_en_regs <= '0';
+        wr_en_accum <= '0';
         rst <= '1';
         rst_accum <= '1';
         wait for 10 ns;
         
         rst_accum <= '0';
         rst <= '0';
+        wait for 10 ns;
+        -- ==================================== --
+
+        -- Write 0xFFFF to register 3
+        wr_en_regs <= '1';
+        data_in_regs <= "1111111111111111";
+        reg_sel_wr <= "00011";
+        wait for 10 ns;
+
+        -- Write 0x0001 to register 4
+        data_in_regs <= "0000000000000001";
+        reg_sel_wr <= "00100";
+        wait for 10 ns;
+
+        -- Read from register 3 and write to accumulator
+        wr_en_regs <= '0';
+        wr_en_accum <= '1';
+        opcode <= "000";
+        reg_sel_rd <= "00011";
+        wait for 10 ns;
+
+        -- Sum accumulator with register 4
+        reg_sel_rd <= "00100";
+        wait for 10 ns;
+
+        wr_en_accum <= '0';
+
         wait;
     end process tb;
 end architecture;
