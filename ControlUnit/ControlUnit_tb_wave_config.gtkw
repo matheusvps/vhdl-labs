@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Thu Nov 21 02:55:38 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\ControlUnit_tb_wave.ghw"
+[dumpfile_mtime] "Thu Nov 21 02:54:10 2024"
+[dumpfile_size] 2788
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\ControlUnit_tb_wave_config.gtkw"
+[timestart] 38880000
+[size] 1920 1009
+[pos] -243 -243
+*-23.132578 49820000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.controlunit_tb.
+[sst_width] 197
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@28
+top.controlunit_tb.clk
+@29
+#{top.controlunit_tb.instruction[13:0]} top.controlunit_tb.instruction[13] top.controlunit_tb.instruction[12] top.controlunit_tb.instruction[11] top.controlunit_tb.instruction[10] top.controlunit_tb.instruction[9] top.controlunit_tb.instruction[8] top.controlunit_tb.instruction[7] top.controlunit_tb.instruction[6] top.controlunit_tb.instruction[5] top.controlunit_tb.instruction[4] top.controlunit_tb.instruction[3] top.controlunit_tb.instruction[2] top.controlunit_tb.instruction[1] top.controlunit_tb.instruction[0]
+@28
+top.controlunit_tb.jump_enable
+@22
+#{top.controlunit_tb.jump_address[7:0]} top.controlunit_tb.jump_address[7] top.controlunit_tb.jump_address[6] top.controlunit_tb.jump_address[5] top.controlunit_tb.jump_address[4] top.controlunit_tb.jump_address[3] top.controlunit_tb.jump_address[2] top.controlunit_tb.jump_address[1] top.controlunit_tb.jump_address[0]
+[pattern_trace] 1
+[pattern_trace] 0

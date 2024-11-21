@@ -1,0 +1,26 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Thu Nov 21 00:47:41 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\UnitControl\ROM_tb_wave.ghw"
+[dumpfile_mtime] "Thu Nov 21 00:46:50 2024"
+[dumpfile_size] 2127
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\UnitControl\rom_tb_wave_config.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-26.176662 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.rom_tb.
+[sst_width] 197
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+top.rom_tb.clk
+@22
+#{top.rom_tb.endereco[7:0]} top.rom_tb.endereco[7] top.rom_tb.endereco[6] top.rom_tb.endereco[5] top.rom_tb.endereco[4] top.rom_tb.endereco[3] top.rom_tb.endereco[2] top.rom_tb.endereco[1] top.rom_tb.endereco[0]
+@23
+#{top.rom_tb.dado[13:0]} top.rom_tb.dado[13] top.rom_tb.dado[12] top.rom_tb.dado[11] top.rom_tb.dado[10] top.rom_tb.dado[9] top.rom_tb.dado[8] top.rom_tb.dado[7] top.rom_tb.dado[6] top.rom_tb.dado[5] top.rom_tb.dado[4] top.rom_tb.dado[3] top.rom_tb.dado[2] top.rom_tb.dado[1] top.rom_tb.dado[0]
+[pattern_trace] 1
+[pattern_trace] 0

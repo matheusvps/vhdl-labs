@@ -1,0 +1,25 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Thu Nov 21 01:09:33 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\stateMachine_tb_wave.ghw"
+[dumpfile_mtime] "Thu Nov 21 01:08:39 2024"
+[dumpfile_size] 2241
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\stateMachine_tb_wave_config.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 476 92
+*-28.195814 399000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.statemachine_tb.
+[sst_width] 197
+[signals_width] 94
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+top.statemachine_tb.clk
+top.statemachine_tb.estado_o
+@29
+top.statemachine_tb.reset
+[pattern_trace] 1
+[pattern_trace] 0
