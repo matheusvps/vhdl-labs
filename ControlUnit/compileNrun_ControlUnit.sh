@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ghdl -a StateMachine.vhd
+ghdl -e StateMachine
 ghdl -a ControlUnit.vhd
 ghdl -e ControlUnit
 ghdl -a ControlUnit_tb.vhd

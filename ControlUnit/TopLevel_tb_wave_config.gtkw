@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Nov 21 03:07:49 2024
+[*] Fri Nov 22 18:39:39 2024
 [*]
-[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\TopLevel_tb_wave.ghw"
-[dumpfile_mtime] "Thu Nov 21 03:05:34 2024"
+[dumpfile] "E:\Users\jhony\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\vhdl-labs\ControlUnit\TopLevel_tb_wave.ghw"
+[dumpfile_mtime] "Fri Nov 22 18:39:33 2024"
 [dumpfile_size] 6280
-[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\TopLevel_tb_wave_config.gtkw"
+[savefile] "E:\Users\jhony\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\vhdl-labs\ControlUnit\TopLevel_tb_wave_config.gtkw"
 [timestart] 0
-[size] 1920 1009
-[pos] -113 -113
+[size] 1540 845
+[pos] -1 -1
 *-24.073118 175000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.toplevel_tb.
@@ -21,10 +21,10 @@ top.toplevel_tb.clk
 top.toplevel_tb.wr_enable
 @22
 #{top.toplevel_tb.data_out_pc[7:0]} top.toplevel_tb.data_out_pc[7] top.toplevel_tb.data_out_pc[6] top.toplevel_tb.data_out_pc[5] top.toplevel_tb.data_out_pc[4] top.toplevel_tb.data_out_pc[3] top.toplevel_tb.data_out_pc[2] top.toplevel_tb.data_out_pc[1] top.toplevel_tb.data_out_pc[0]
+@29
+#{top.toplevel_tb.data_out_rom[13:0]} top.toplevel_tb.data_out_rom[13] top.toplevel_tb.data_out_rom[12] top.toplevel_tb.data_out_rom[11] top.toplevel_tb.data_out_rom[10] top.toplevel_tb.data_out_rom[9] top.toplevel_tb.data_out_rom[8] top.toplevel_tb.data_out_rom[7] top.toplevel_tb.data_out_rom[6] top.toplevel_tb.data_out_rom[5] top.toplevel_tb.data_out_rom[4] top.toplevel_tb.data_out_rom[3] top.toplevel_tb.data_out_rom[2] top.toplevel_tb.data_out_rom[1] top.toplevel_tb.data_out_rom[0]
 @28
 top.toplevel_tb.jump_enable_s
 #{top.toplevel_tb.jump_address_s[7:0]} top.toplevel_tb.jump_address_s[7] top.toplevel_tb.jump_address_s[6] top.toplevel_tb.jump_address_s[5] top.toplevel_tb.jump_address_s[4] top.toplevel_tb.jump_address_s[3] top.toplevel_tb.jump_address_s[2] top.toplevel_tb.jump_address_s[1] top.toplevel_tb.jump_address_s[0]
-@29
-#{top.toplevel_tb.data_out_rom[13:0]} top.toplevel_tb.data_out_rom[13] top.toplevel_tb.data_out_rom[12] top.toplevel_tb.data_out_rom[11] top.toplevel_tb.data_out_rom[10] top.toplevel_tb.data_out_rom[9] top.toplevel_tb.data_out_rom[8] top.toplevel_tb.data_out_rom[7] top.toplevel_tb.data_out_rom[6] top.toplevel_tb.data_out_rom[5] top.toplevel_tb.data_out_rom[4] top.toplevel_tb.data_out_rom[3] top.toplevel_tb.data_out_rom[2] top.toplevel_tb.data_out_rom[1] top.toplevel_tb.data_out_rom[0]
 [pattern_trace] 1
 [pattern_trace] 0

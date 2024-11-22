@@ -10,14 +10,14 @@ architecture sim of ROM_tb is
         port(
             clk      : in std_logic;
             endereco : in unsigned(7 downto 0);
-            dado     : out unsigned(13 downto 0)
+            dado     : out std_logic_vector(13 downto 0)
         );
     end component;
 
     signal finished : std_logic := '0';
     signal clk      : std_logic := '0';
     signal endereco : unsigned(7 downto 0) := (others => '0');
-    signal dado     : unsigned(13 downto 0);
+    signal dado     : std_logic_vector(13 downto 0);
 
     constant clk_period : time := 10 ns;
 begin

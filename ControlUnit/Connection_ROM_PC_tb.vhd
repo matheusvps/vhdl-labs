@@ -10,15 +10,17 @@ architecture sim of Connection_ROM_PC_tb is
         port(
             clk: in std_logic;
             endereco : in unsigned(7 downto 0);
-            dado     : out unsigned(13 downto 0) -- 14 bits para cada dado
+            dado     : out std_logic_vector(13 downto 0) -- 14 bits para cada dado
         );
     end component;
 
     component ProgramCounter_Control is
         port(
-            clk       : in std_logic;
-            wr_enable : in std_logic;
-            data_out  : out unsigned(7 downto 0)
+            clk         : in std_logic;
+            wr_enable   : in std_logic;
+            jump_enable : in std_logic;
+            jump_in     : in unsigned(7 downto 0);
+            data_out    : out unsigned(7 downto 0)
         );
     end component;
 
@@ -26,7 +28,7 @@ architecture sim of Connection_ROM_PC_tb is
     signal finished : std_logic := '0';
     signal wr_enable : std_logic := '0';
     signal data_out_pc : unsigned(7 downto 0);
-    signal data_out_rom : unsigned(13 downto 0);
+    signal data_out_rom : std_logic_vector(13 downto 0);
     signal clk_period : time := 10 ns;
 
 begin
@@ -41,6 +43,8 @@ begin
         port map(
             clk => clk,
             wr_enable => wr_enable,
+            jump_enable => '0',
+            jump_in => (others => '0'),
             data_out => data_out_pc
         );
     
