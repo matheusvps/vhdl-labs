@@ -1,27 +1,30 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity StateMachine is
    port(
-      clk   : in std_logic;  -- Clock
-      reset : in std_logic;  -- Reset síncrono
-      estado_o : out std_logic -- Saída representando o estado atual
+      clk    : in std_logic;             -- Clock
+      rst    : in std_logic;             -- Reset
+      estado : out unsigned(1 downto 0)  -- Estado atual
    );
 end entity;
 
-architecture behavior of StateMachine is
-   signal estado_s : std_logic := '0'; -- Estado interno (0: Fetch, 1: Decode/Execute)
+architecture a_StateMachine of StateMachine is
+   signal estado_s : unsigned(1 downto 0); -- Estado interno
 begin
-   process(clk)
+   process(clk, rst)
    begin
-      if rising_edge(clk) then
-         if reset = '1' then
-            estado_s <= '0'; -- Reset: volta para o estado Fetch
+      if rst = '1' then
+         estado_s <= "00";               -- Reset: volta ao estado 0
+      elsif rising_edge(clk) then
+         if estado_s = "10" then         -- Se no estado 2
+            estado_s <= "00";            -- Próximo estado é 0
          else
-            estado_s <= not estado_s; -- Flip-flop T: alterna entre Fetch e Decode/Execute
+            estado_s <= estado_s + 1;    -- Avança para o próximo estado
          end if;
       end if;
    end process;
 
-   estado_o <= estado_s; -- Saída do estado atual
+   estado <= estado_s; -- Saída do estado atual
 end architecture;

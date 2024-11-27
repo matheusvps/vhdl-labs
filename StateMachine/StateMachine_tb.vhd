@@ -1,32 +1,32 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity StateMachine_tb is
 end entity;
 
 architecture sim of StateMachine_tb is
-    -- Instância da máquina de estados
     component StateMachine is
         port(
-            clk      : in std_logic;
-            reset    : in std_logic;
-            estado_o : out std_logic
+            clk    : in std_logic;
+            rst    : in std_logic;
+            estado : out unsigned(1 downto 0)
         );
     end component;
 
-    signal clk      : std_logic := '0';
-    signal reset    : std_logic := '0';
-    signal estado_o : std_logic;
-    signal finished : std_logic := '0';
+    signal clk    : std_logic := '0';              
+    signal rst    : std_logic := '0';              
+    signal estado : unsigned(1 downto 0);          
+    signal finished : std_logic := '0';            
 
-    constant clk_period : time := 10 ns;
+    constant clk_period : time := 10 ns;           
 begin
     -- Instância da máquina de estados
     uut: StateMachine
         port map(
-            clk      => clk,
-            reset    => reset,
-            estado_o => estado_o
+            clk    => clk,
+            rst    => rst,
+            estado => estado
         );
 
     clk_proc: process
@@ -49,17 +49,15 @@ begin
 
     process
     begin
-        -- Reseta a máquina de estados
-        reset <= '1';
+        rst <= '1';
         wait for 25 ns;
-        reset <= '0';
-        
-        wait for 100 ns;
-        reset <= '1';
-        wait for 25 ns;
-        reset <= '0';
+        rst <= '0';
 
-        -- Finaliza a simulação
+        wait for 100 ns;
+
+        rst <= '1';
+        wait for 25 ns;
+        rst <= '0';
         wait;
     end process;
 end architecture;
