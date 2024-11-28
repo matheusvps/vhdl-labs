@@ -3,11 +3,12 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity Register16bits is
-   port( clock      : in std_logic;
-         rst      : in std_logic;
-         wr_en    : in std_logic;
-         data_in  : in STD_LOGIC_VECTOR(15 downto 0);
-         data_out : out STD_LOGIC_VECTOR(15 downto 0)
+   port( 
+      clock    : in std_logic;
+      rst      : in std_logic;
+      wr_en    : in std_logic;
+      data_in  : in STD_LOGIC_VECTOR(15 downto 0);
+      data_out : out STD_LOGIC_VECTOR(15 downto 0)
    );
 end entity;
 

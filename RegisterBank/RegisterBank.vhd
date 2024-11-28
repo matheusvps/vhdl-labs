@@ -7,7 +7,7 @@ use IEEE.numeric_std.all;
 -- 
 
 entity RegisterBank is
-    Port (
+    port (
         clock   : in  STD_LOGIC;
         rst     : in  STD_LOGIC; -- Reseta todos os registradores
         wr_en   : in  STD_LOGIC; 

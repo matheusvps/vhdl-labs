@@ -4,11 +4,16 @@ use ieee.numeric_std.all;
 
 entity StateMachine is
    port(
-      clk    : in std_logic;             -- Clock
-      rst    : in std_logic;             -- Reset
+      clk    : in std_logic;
+      rst    : in std_logic;
       estado : out unsigned(1 downto 0)  -- Estado atual
    );
 end entity;
+
+-- Estados:
+--    00: Fetch
+--    01: Decode
+--    10: Execute
 
 architecture a_StateMachine of StateMachine is
    signal estado_s : unsigned(1 downto 0); -- Estado interno

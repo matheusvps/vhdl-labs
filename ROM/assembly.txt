@@ -1,0 +1,31 @@
+# A. Carrega R3 com o valor 5 usando LD
+LD R3, 5
+
+# B. Carrega R4 com o valor 8 usando LD
+LD R4, 8
+
+# C Soma R3 com R4 e guarda no acumulador
+ADD ACC, R3      # Adiciona R3 ao acumulador    
+ADD ACC, R4      # Adiciona R4 ao acumulador
+
+# D. Subtrai 1 de ACC (subtração apenas entre registradores)
+LD R2, 1        # Carrega o valor 1 em R2
+SUB ACC, R2      # Subtrai R2 do acumulador
+
+# E. Salta para o endereço 20 (incondicional absoluto)
+JMP 20
+
+# F. Zera R5 (nunca será executada)
+F:
+LD R5, 0        # Carrega 0 em R5
+
+# G. No endereço 20, copia ACC para R3
+20:
+MV R3, ACC       # Move o valor do acumulador para R3
+
+# H. Salta para o passo C desta lista (incondicional absoluto)
+JMP C
+
+# I. Zera R3 (nunca será executada)
+I:
+LD R3, 0        # Carrega 0 em R3

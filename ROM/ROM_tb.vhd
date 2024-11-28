@@ -49,7 +49,7 @@ begin
     tb: process
     begin
         -- Testa os primeiros endereços
-        for i in 0 to 20 loop
+        for i in 0 to 127 loop
             endereco <= to_unsigned(i, 8);
             wait for clk_period;
         end loop;
