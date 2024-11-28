@@ -1,13 +1,18 @@
 #!/bin/bash
 
-ghdl -a StateMachine.vhd
-ghdl -e StateMachine
-ghdl -a ControlUnit.vhd
-ghdl -e ControlUnit
-ghdl -a ControlUnit_tb.vhd
-ghdl -e ControlUnit_tb
 
-ghdl -r ControlUnit_tb --wave=ControlUnit_tb_wave.ghw
+ghdl -a ../StateMachine/StateMachine.vhd
+ghdl -a ../ProgramCounter/ProgramCounter.vhd
+ghdl -a ../ProgramCounter/ProgramCounter_Control.vhd
+ghdl -a ../ROM/ROM.vhd
+ghdl -a ../ControlUnit/ControlUnit.vhd
+ghdl -a ../RegisterBank/Register16Bits.vhd
+ghdl -a ../RegisterBank/RegisterBank.vhd
+ghdl -a ../ULA/ULA.vhd
+ghdl -a processador_tb.vhd
+ghdl -e StateMachine ProgramCounter ProgramCounter_Control ROM ControlUnit Register16Bits RegisterBank ULA processador_tb
 
-gtkwave ControlUnit_tb_wave.ghw -o ControlUnit_tb_wave_config.gtkw
+ghdl -r processador_tb --wave=processador_tb_wave.ghw
+
+gtkwave processador_tb_wave.ghw -o processador_tb_wave_config.gtkw
 read  -n 1

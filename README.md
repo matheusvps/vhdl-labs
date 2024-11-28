@@ -20,7 +20,7 @@ ld:
     0110_DDDD_CCCCCC  
 
 lw:  
-    0111_SSSS_DDDD_XX  
+    0111_DDDD_SSSS_XX  
 
 or:  
     1000_SSSS_XXXXXX  
@@ -29,7 +29,7 @@ mult:
     1001_SSSS_XXXXXX  
 
 mov:  
-    1010_SSSS_DDDD_XX  
+    1010_DDDD_SSSS_XX  
 
 sw:  
     1011_SSSS_XXXXXX  

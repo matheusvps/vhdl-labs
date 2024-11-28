@@ -6,13 +6,13 @@ entity ProgramCounter is
     port(
         clk       : in std_logic;             
         wr_enable : in std_logic;              
-        data_in   : in unsigned(7 downto 0);   
-        data_out  : out unsigned(7 downto 0)  
+        data_in   : in unsigned(6 downto 0);   
+        data_out  : out unsigned(6 downto 0)  
     );
 end entity;
 
 architecture behavior of ProgramCounter is
-    signal reg : unsigned(7 downto 0) := (others => '0'); 
+    signal reg : unsigned(6 downto 0) := (others => '0'); 
 begin
     process(clk)
     begin

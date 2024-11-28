@@ -7,8 +7,8 @@ entity ProgramCounter_Control is
         clk         : in std_logic;
         wr_enable   : in std_logic;
         jump_enable : in std_logic;
-        jump_in     : in unsigned(7 downto 0);
-        data_out    : out unsigned(7 downto 0)
+        jump_in     : in unsigned(6 downto 0);
+        data_out    : out unsigned(6 downto 0)
     );
 end entity;
 
@@ -17,14 +17,14 @@ architecture behavior of ProgramCounter_Control is
         port(
             clk       : in std_logic;
             wr_enable : in std_logic;
-            data_in   : in unsigned(7 downto 0);
-            data_out  : out unsigned(7 downto 0)
+            data_in   : in unsigned(6 downto 0);
+            data_out  : out unsigned(6 downto 0)
         );
     end component;
 
-    signal pc_plus_1  : unsigned(7 downto 0) := (others => '0');
-    signal data_out_s : unsigned(7 downto 0);
-    signal data_in_pc : unsigned(7 downto 0);
+    signal pc_plus_1  : unsigned(6 downto 0) := (others => '0');
+    signal data_out_s : unsigned(6 downto 0);
+    signal data_in_pc : unsigned(6 downto 0);
 begin
     PC: ProgramCounter 
         port map(
