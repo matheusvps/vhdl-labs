@@ -38,7 +38,9 @@ end entity;
             sel_op_ula   : out unsigned(2 downto 0);         -- Operação da ULA
             sel_mux_regs : out std_logic;                    -- Seleção do mux de registradores entre Accumulator e Immediate
             reg_wr_en    : out std_logic;                    -- Habilita a escrita no banco de registradoresW
-            accum_en     : out std_logic                     -- Habilita a escrita no acumulador
+            accum_en     : out std_logic;                    -- Habilita a escrita no acumulador
+            immediate    : out std_logic_vector(15 downto 0); -- Valor constante
+            reg_code     : out std_logic_vector(3 downto 0)  -- Registrador de destino
         );
     end component;
     component RegisterBank is
@@ -47,8 +49,8 @@ end entity;
             rst     : in  STD_LOGIC; -- Reseta todos os registradores
             wr_en   : in  STD_LOGIC; 
             data_wr : in  STD_LOGIC_VECTOR(15 downto 0); -- Dado a ser escrito
-            reg_wr  : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para escrita
-            reg_r   : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para leitura
+            reg_wr  : in  STD_LOGIC_VECTOR(3 downto 0);  -- Seleção do registrador para escrita
+            reg_r   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Seleção do registrador para leitura
             data_r  : out STD_LOGIC_VECTOR(15 downto 0) -- Dado lido do registrador selecionado
         );
     end component;
@@ -70,21 +72,21 @@ end entity;
         );
     end component;
 
-    signal carry, zero, clk, rst, jump_enable, reg_en, pc_en, accum_en, cu_en : std_logic := '0';
+    signal carry, zero, clk, rst, jump_enable, reg_en, pc_en, accum_en : std_logic := '0';
     signal estado : unsigned(1 downto 0);
     signal pc_out : unsigned(6 downto 0);
     signal rom_data : std_logic_vector(13 downto 0);
     signal jump_address : unsigned(6 downto 0);
-    signal reg_wr, reg_r : std_logic_vector(4 downto 0);
+    signal reg_wr_s, reg_r_s : std_logic_vector(3 downto 0);
     signal ula_out : unsigned(15 downto 0);
-    signal accum_out, data_r : std_logic_vector(15 downto 0);
-    signal op_ula : std_logic_vector(2 downto 0);
+    signal accum_out, data_r_s : std_logic_vector(15 downto 0);
     signal imm : std_logic_vector(15 downto 0);
     signal sel_mux_regs_s : std_logic;
     signal reg_wr_en_s : std_logic;
     signal sel_op_ula_s : unsigned(2 downto 0);
     signal accum_en_s : std_logic;
     signal data_wr_mux : std_logic_vector(15 downto 0);
+    signal reg_code_s : std_logic_vector(3 downto 0);
 
     -- Simulation parameters
     constant clk_period : time := 10 ns;
@@ -119,7 +121,9 @@ begin
         sel_op_ula   => sel_op_ula_s,
         sel_mux_regs => sel_mux_regs_s,
         reg_wr_en    => reg_wr_en_s,
-        accum_en     => accum_en_s
+        accum_en     => accum_en_s,
+        immediate    => imm,
+        reg_code     => reg_code_s
     );
 
     register_bank: RegisterBank port map(
@@ -127,9 +131,9 @@ begin
         rst     => rst,
         wr_en   => reg_en,
         data_wr => data_wr_mux,
-        reg_wr  => reg_wr,
-        reg_r   => reg_r,
-        data_r  => data_r
+        reg_wr  => reg_code_s,
+        reg_r   => reg_code_s,
+        data_r  => data_r_s
     );
 
     accumulator: Register16Bits port map(
@@ -141,26 +145,22 @@ begin
     );
 
     ula_1: ULA port map(
-        A      => UNSIGNED(data_r),
-        B      => UNSIGNED(accum_out),
-        opcode => UNSIGNED(op_ula),
+        A      => UNSIGNED(accum_out),
+        B      => UNSIGNED(data_r_s),
+        opcode => UNSIGNED(sel_op_ula_s),
         Result => ula_out,
         Zero   => zero,
         Carry  => carry
     );
 
-    -- Extract Immediate from ROM data
-    imm <= "0000000000" & rom_data(5 downto 0);
-
     -- Enables do FETCH
-    pc_en <= '1' when estado = "00" else '0';
+    pc_en <= '1' when estado = "10" else '0';
 
     -- Enables do DECODE
-    cu_en <= '1' when estado = "01" else '0';
 
     -- Enables do EXECUTE
-    accum_en <= accum_en_s when estado = "10" else '0';
-    reg_en <= reg_wr_en_s when estado = "10" else '0';
+    accum_en <= accum_en_s when estado = "01" else '0';
+    reg_en <= reg_wr_en_s when estado = "01" else '0';
 
     -- Registers Write Data Mux
     data_wr_mux <= accum_out when sel_mux_regs_s = '1' else imm;

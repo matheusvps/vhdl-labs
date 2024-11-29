@@ -2,46 +2,46 @@
 VHDL Labs - UTFPR - Computer Architecture
 
 ## Codificação
-MSB b13               b0 LSB
-    |                 |
+MSB b13              b0 LSB
+    |---------------|
 nop:  
-    0000_XXXXXXXXXX  
+    0000_XXXX_XXXX_XX  
 
 add:  
-    0001_DDDD_SSSS_XX
+    0001_SSSS_XXXX_XX
     
 sub:  
-    0011_DDDD_SSSS_XX
+    0011_SSSS_XXXX_XX
 
 cmp:  
-    0101_SSSS_XXXXXX  
+    0101_SSSS_XXXX_XX  
 
 ld:  
-    0110_DDDD_CCCCCC  
+    0110_DDDD_CCCC_CC  
 
 lw:  
     0111_DDDD_SSSS_XX  
 
 or:  
-    1000_SSSS_XXXXXX  
+    1000_SSSS_XXXX_XX  
 
 mult:  
-    1001_SSSS_XXXXXX  
+    1001_SSSS_XXXX_XX  
 
 mov:  
     1010_DDDD_SSSS_XX  
 
 sw:  
-    1011_SSSS_XXXXXX  
+    1011_SSSS_XXXX_XX  
 
 jmp:  
-    1111_AAAAAAA_XXX  
+    1111_AAAA_AAAX_XX  
 
 beq:  
-    1101_AAAAAAA_XXX  
+    1101_AAAA_AAAX_XX  
 
 blt:  
-    1110_AAAAAAA_XXX  
+    1110_AAAA_AAAX_XX  
 
 X: irrelevante
 D: registrador destino

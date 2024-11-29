@@ -12,8 +12,8 @@ entity RegisterBank is
         rst     : in  STD_LOGIC; -- Reseta todos os registradores
         wr_en   : in  STD_LOGIC; 
         data_wr : in  STD_LOGIC_VECTOR(15 downto 0); -- Dado a ser escrito
-        reg_wr  : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para escrita
-        reg_r   : in  STD_LOGIC_VECTOR(4 downto 0);  -- Seleção do registrador para leitura
+        reg_wr  : in  STD_LOGIC_VECTOR(3 downto 0);  -- Seleção do registrador para escrita
+        reg_r   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Seleção do registrador para leitura
         data_r  : out STD_LOGIC_VECTOR(15 downto 0) -- Dado lido do registrador selecionado
     );
 end RegisterBank;
@@ -117,25 +117,25 @@ begin
                                  );
 
     -- Process para definir o registrador de escrita
-    write_en_0 <= '1' when (wr_en = '1' and reg_wr = "00000") else '0';
-    write_en_1 <= '1' when (wr_en = '1' and reg_wr = "00001") else '0';
-    write_en_2 <= '1' when (wr_en = '1' and reg_wr = "00010") else '0';
-    write_en_3 <= '1' when (wr_en = '1' and reg_wr = "00011") else '0';
-    write_en_4 <= '1' when (wr_en = '1' and reg_wr = "00100") else '0';
-    write_en_5 <= '1' when (wr_en = '1' and reg_wr = "00101") else '0';
-    write_en_6 <= '1' when (wr_en = '1' and reg_wr = "00110") else '0';
-    write_en_7 <= '1' when (wr_en = '1' and reg_wr = "00111") else '0';
-    write_en_8 <= '1' when (wr_en = '1' and reg_wr = "01000") else '0';
+    write_en_0 <= '1' when (wr_en = '1' and reg_wr = "0000") else '0';
+    write_en_1 <= '1' when (wr_en = '1' and reg_wr = "0001") else '0';
+    write_en_2 <= '1' when (wr_en = '1' and reg_wr = "0010") else '0';
+    write_en_3 <= '1' when (wr_en = '1' and reg_wr = "0011") else '0';
+    write_en_4 <= '1' when (wr_en = '1' and reg_wr = "0100") else '0';
+    write_en_5 <= '1' when (wr_en = '1' and reg_wr = "0101") else '0';
+    write_en_6 <= '1' when (wr_en = '1' and reg_wr = "0110") else '0';
+    write_en_7 <= '1' when (wr_en = '1' and reg_wr = "0111") else '0';
+    write_en_8 <= '1' when (wr_en = '1' and reg_wr = "1000") else '0';
 
     -- Seleciona o registrador de leitura
-    data_r <= register_data_0 when reg_r = "00000" else
-              register_data_1 when reg_r = "00001" else
-              register_data_2 when reg_r = "00010" else
-              register_data_3 when reg_r = "00011" else
-              register_data_4 when reg_r = "00100" else
-              register_data_5 when reg_r = "00101" else
-              register_data_6 when reg_r = "00110" else
-              register_data_7 when reg_r = "00111" else
-              register_data_8 when reg_r = "01000" else (others => '0');
+    data_r <= register_data_0 when reg_r = "0000" else
+              register_data_1 when reg_r = "0001" else
+              register_data_2 when reg_r = "0010" else
+              register_data_3 when reg_r = "0011" else
+              register_data_4 when reg_r = "0100" else
+              register_data_5 when reg_r = "0101" else
+              register_data_6 when reg_r = "0110" else
+              register_data_7 when reg_r = "0111" else
+              register_data_8 when reg_r = "1000" else (others => '0');
 
 end architecture;
