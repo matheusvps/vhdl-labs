@@ -20,6 +20,19 @@ instructions = {
 
 COMMENT_CHAR = '#'
 
+def invert_bits(bin_string):
+    return ''.join(['1' if bit == '0' else '0' for bit in bin_string])
+
+def get_twos_complement(value, bits=7):
+    if value > 0:
+        bin_string = bin(value)[2:].zfill(bits)
+        return bin_string
+    value = abs(value)
+    bin_string = bin(value)[2:].zfill(bits)
+    reversed_bin = invert_bits(bin_string)
+    twos_complement = bin(int(reversed_bin, 2) + 1)[2:].zfill(bits)
+    return twos_complement
+
 def assemble(filename):
     labels = {}
     rom_code = []
@@ -69,6 +82,10 @@ def assemble(filename):
             elif instruction in ["JMP", "BEQ", "BLT"]:  # INSTRUCTIONS WITH LABEL
                 op1 = space_split[1].strip()
                 op2 = "000"
+                if instruction == "JMP":
+                    op1 = 'A' + op1   # Absolute jump
+                else:
+                    op1 = 'R' + op1   # Relative jump
             
             elif instruction in ["ADD", "SUB", "OR", "MULT"]: # INSTRUCTIONS WITH ONLY 1 REGISTER
                 operand1 = operands[1].strip()
@@ -99,8 +116,15 @@ def assemble(filename):
     # Substitute labels for their respective addresses
     for i, line in enumerate(rom_code):
         for label, address in labels.items():
-            if label in line.split('--')[0]:
-                rom_code[i] = rom_code[i].replace(label, bin(int(address))[2:].zfill(7), 1)
+            code = line.split('--')[0]
+            ind = code.find(label)
+            if ind == -1 and code.find(label) == -1:
+                continue
+
+            if code[ind-1] == 'A':  # Absolute jump
+                rom_code[i] = rom_code[i].replace('A'+label, get_twos_complement(address), 1)
+            elif code[ind-1] == 'R':
+                rom_code[i] = rom_code[i].replace('R'+label, get_twos_complement(address-i), 1)
 
     return rom_code
 

@@ -26,7 +26,7 @@ G:
     MOV R3, ACC      # Move o valor do acumulador para R3
 
 # H. Salta para o passo C desta lista (incondicional absoluto)
-    JMP C
+    BEQ C
 
 # I. Zera R3 (nunca será executada)
 labelI:
