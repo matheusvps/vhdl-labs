@@ -100,7 +100,7 @@ def assemble(filename):
     for i, line in enumerate(rom_code):
         for label, address in labels.items():
             if label in line.split('--')[0]:
-                rom_code[i] = rom_code[i].replace(label, bin(int(address))[2:].zfill(7))
+                rom_code[i] = rom_code[i].replace(label, bin(int(address))[2:].zfill(7), 1)
 
     return rom_code
 
