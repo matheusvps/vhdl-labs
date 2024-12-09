@@ -21,6 +21,7 @@ instructions = {
 COMMENT_CHAR = '#'
 
 def assemble(filename):
+    labels = {}
     rom_code = []
     with open(filename) as f:
         lines = f.readlines()
@@ -33,6 +34,16 @@ def assemble(filename):
 
             # Remove comments from line, if any
             code = line.split(COMMENT_CHAR, 1)[0]
+
+            # Handle labels
+            if ":" in code:
+                label, code = code.split(":", 1)
+                label = label.strip()
+                code = code.strip()
+                labels[label] = i
+            
+            if code == "":  # If the line was only a label
+                continue
             
             # Split the code into tokens
             space_split = code.split(" ", 1)
@@ -54,29 +65,42 @@ def assemble(filename):
                 op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
                 operand2 = operands[1].strip()
                 op2 = bin(int(operand2))[2:].zfill(6)
+
             elif instruction in ["JMP", "BEQ", "BLT"]:  # INSTRUCTIONS WITH LABEL
-                print("Can't handle labels yet")
+                op1 = space_split[1].strip()
+                op2 = "000"
+            
             elif instruction in ["ADD", "SUB", "OR", "MULT"]: # INSTRUCTIONS WITH ONLY 1 REGISTER
                 operand1 = operands[1].strip()
                 op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
                 op2 = "000000"
+            
             elif instruction in ["LW", "SW"]: # INSTRUCTIONS WITH MEMORY ACCESS
                 print("Can't handle memory instructions yet")
+            
             elif instruction in ["ZAC", "NOP"]: # INSTRUCTIONS WITHOUT OPERANDS
                 op1 = "0000"
                 op2 = "000000"
+            
             elif instruction in ["MOV", "CMP"]: # INSTRUCTIONS WITH 2 OPERANDS
                 # MODIFICAR POIS POR AGORA SÓ LIDA COM ACUMULADOR->REGISTRADOR
                 operand1 = operands[0].strip()
                 op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
                 op2 = "1111"
                 op2 = op2 + "00"
+            
             else:
                 print("Instruction not defined in ISA")
                 sys.exit(1)
             
             rom_code.append(f"{str(i).rjust(3)} => B\"{opcode}_{op1}_{op2}\",  -- {line}")
             i += 1
+
+    # Substitute labels for their respective addresses
+    for i, line in enumerate(rom_code):
+        for label, address in labels.items():
+            if label in line.split('--')[0]:
+                rom_code[i] = rom_code[i].replace(label, bin(int(address))[2:].zfill(7))
 
     return rom_code
 
