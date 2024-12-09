@@ -43,6 +43,9 @@ beq:
 blt:  
     1110_AAAA_AAAX_XX  
 
+zac:
+    1100_XXXX_XXXX_XX
+
 X: irrelevante
 D: registrador destino
 S: registrador fonte
@@ -52,15 +55,17 @@ A: endereço
 opcode:  operação:
 0000     nop
 0001     add
+0010     *not used*
 0011     sub
+0100     *not used*
 0101     cmp (compara com registrador)
 0110     ld
-0111     lda
+0111     lw
 1000     OR
 1001     mult
 1010     mov
-1011     open
-1111     jump (absoluto)
+1011     sw
+1100     zac  (zerar acumulador)
 1101     BEQ  (relativo) a == b ->flag zero  dá 1
 1110     BLT  (relativo) a < b  ->flag carry dá 1
-1111     inválido
+1111     jump (absoluto)

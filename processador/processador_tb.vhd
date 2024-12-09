@@ -39,6 +39,7 @@ end entity;
             sel_mux_regs : out std_logic;                    -- Seleção do mux de registradores entre Accumulator e Immediate
             reg_wr_en    : out std_logic;                    -- Habilita a escrita no banco de registradoresW
             accum_en     : out std_logic;                    -- Habilita a escrita no acumulador
+            rst_accum    : out std_logic;                     -- Reseta o acumulador
             immediate    : out std_logic_vector(15 downto 0); -- Valor constante
             reg_code     : out std_logic_vector(3 downto 0)  -- Registrador de destino
         );
@@ -72,7 +73,7 @@ end entity;
         );
     end component;
 
-    signal carry, zero, clk, rst, jump_enable, reg_en, pc_en, accum_en : std_logic := '0';
+    signal carry, zero, clk, rst, rst_accum, jump_enable, reg_en, pc_en, accum_en : std_logic := '0';
     signal estado : unsigned(1 downto 0);
     signal pc_out : unsigned(6 downto 0);
     signal rom_data : std_logic_vector(13 downto 0);
@@ -122,6 +123,7 @@ begin
         sel_mux_regs => sel_mux_regs_s,
         reg_wr_en    => reg_wr_en_s,
         accum_en     => accum_en_s,
+        rst_accum    => rst_accum,
         immediate    => imm,
         reg_code     => reg_code_s
     );
@@ -138,7 +140,7 @@ begin
 
     accumulator: Register16Bits port map(
         clock    => clk,
-        rst      => rst,
+        rst      => rst_accum,
         wr_en    => accum_en,
         data_in  => STD_LOGIC_VECTOR(ula_out),
         data_out => accum_out

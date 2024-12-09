@@ -12,6 +12,7 @@ entity ControlUnit is
         sel_mux_regs : out std_logic;                     -- Seleção do mux de registradores entre Accumulator e Immediate
         reg_wr_en    : out std_logic;                     -- Habilita a escrita no banco de registradoresW
         accum_en     : out std_logic;                     -- Habilita a escrita no acumulador
+        rst_accum    : out std_logic;                     -- Reseta o acumulador
         immediate    : out std_logic_vector(15 downto 0); -- Valor constante
         reg_code     : out std_logic_vector(3 downto 0)   -- Registrador de destino
     );
@@ -30,8 +31,8 @@ begin
     immediate <= "0000000000" & instruction(5 downto 0);
 
     -- Extrai os registrador de origem e destino
-    dst_reg <= instruction(9 downto 6) when opcode="1010" -- MOV
-                                       else "0000";
+    -- MODIFICAR AQUI: RETIRAR CONDICIONAL MULTIPLA PARA MOV
+    dst_reg <= instruction(9 downto 6); -- Só é usado em MOV
 
     src_reg <= instruction(5 downto 2) when opcode = "1010" -- MOV
                                        else instruction(9 downto 6);
@@ -66,5 +67,9 @@ begin
                       OR opcode = "0001" -- ADD
                       OR opcode = "0011" -- SUB
                     else '0';
+    
+    -- Reseta o acumulador
+    rst_accum <= '1' when opcode = "1100" else -- ZAC
+                 '0';
 
 end architecture;
