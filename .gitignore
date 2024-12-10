@@ -3,3 +3,5 @@
 *.7z
 
 *.ghw
+
+__pycache__
