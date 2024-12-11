@@ -1,0 +1,34 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Wed Dec 11 02:18:39 2024
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ULA\ula_tb_wave.ghw"
+[dumpfile_mtime] "Wed Dec 11 02:15:09 2024"
+[dumpfile_size] 3524
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ULA\ula_tb_wave_config.gtkw"
+[timestart] 0
+[size] 1920 1009
+[pos] -113 -113
+*-23.473886 70000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.ula_tb.
+[sst_width] 197
+[signals_width] 183
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@22
+#{top.ula_tb.a[15:0]} top.ula_tb.a[15] top.ula_tb.a[14] top.ula_tb.a[13] top.ula_tb.a[12] top.ula_tb.a[11] top.ula_tb.a[10] top.ula_tb.a[9] top.ula_tb.a[8] top.ula_tb.a[7] top.ula_tb.a[6] top.ula_tb.a[5] top.ula_tb.a[4] top.ula_tb.a[3] top.ula_tb.a[2] top.ula_tb.a[1] top.ula_tb.a[0]
+#{top.ula_tb.b[15:0]} top.ula_tb.b[15] top.ula_tb.b[14] top.ula_tb.b[13] top.ula_tb.b[12] top.ula_tb.b[11] top.ula_tb.b[10] top.ula_tb.b[9] top.ula_tb.b[8] top.ula_tb.b[7] top.ula_tb.b[6] top.ula_tb.b[5] top.ula_tb.b[4] top.ula_tb.b[3] top.ula_tb.b[2] top.ula_tb.b[1] top.ula_tb.b[0]
+@28
+#{top.ula_tb.opcode[2:0]} top.ula_tb.opcode[2] top.ula_tb.opcode[1] top.ula_tb.opcode[0]
+@22
+#{top.ula_tb.result[15:0]} top.ula_tb.result[15] top.ula_tb.result[14] top.ula_tb.result[13] top.ula_tb.result[12] top.ula_tb.result[11] top.ula_tb.result[10] top.ula_tb.result[9] top.ula_tb.result[8] top.ula_tb.result[7] top.ula_tb.result[6] top.ula_tb.result[5] top.ula_tb.result[4] top.ula_tb.result[3] top.ula_tb.result[2] top.ula_tb.result[1] top.ula_tb.result[0]
+@28
+top.ula_tb.uut.flags_wr_en
+top.ula_tb.uut.zero
+top.ula_tb.uut.carry
+top.ula_tb.uut.zero_s
+@29
+top.ula_tb.uut.carry_s
+[pattern_trace] 1
+[pattern_trace] 0

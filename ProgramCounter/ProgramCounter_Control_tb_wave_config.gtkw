@@ -1,30 +1,33 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Nov 21 02:35:28 2024
+[*] Tue Dec 10 23:26:26 2024
 [*]
-[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\ProgramCounter_Control_tb_wave.ghw"
-[dumpfile_mtime] "Thu Nov 21 02:34:37 2024"
-[dumpfile_size] 4242
-[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ControlUnit\ProgramCounter_Control_tb_wave_config.gtkw"
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ProgramCounter\ProgramCounter_Control_tb_wave.ghw"
+[dumpfile_mtime] "Tue Dec 10 23:25:46 2024"
+[dumpfile_size] 2811
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\ProgramCounter\ProgramCounter_Control_tb_wave_config.gtkw"
 [timestart] 0
 [size] 1902 991
-[pos] 0 -1080
-*-24.882139 14900000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-24.882139 95200000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.programcounter_control_tb.
 [treeopen] top.programcounter_control_tb.pc_control.
 [treeopen] top.programcounter_control_tb.pc_control.pc.
-[sst_width] 197
-[signals_width] 142
+[sst_width] 275
+[signals_width] 162
 [sst_expanded] 1
 [sst_vpaned_height] 291
 @28
 top.programcounter_control_tb.clk
 top.programcounter_control_tb.wr_enable
 top.programcounter_control_tb.jump_enable
-@23
-#{top.programcounter_control_tb.jump_in[7:0]} top.programcounter_control_tb.jump_in[7] top.programcounter_control_tb.jump_in[6] top.programcounter_control_tb.jump_in[5] top.programcounter_control_tb.jump_in[4] top.programcounter_control_tb.jump_in[3] top.programcounter_control_tb.jump_in[2] top.programcounter_control_tb.jump_in[1] top.programcounter_control_tb.jump_in[0]
 @22
-#{top.programcounter_control_tb.data_out[7:0]} top.programcounter_control_tb.data_out[7] top.programcounter_control_tb.data_out[6] top.programcounter_control_tb.data_out[5] top.programcounter_control_tb.data_out[4] top.programcounter_control_tb.data_out[3] top.programcounter_control_tb.data_out[2] top.programcounter_control_tb.data_out[1] top.programcounter_control_tb.data_out[0]
+#{top.programcounter_control_tb.jump_in[7:0]} top.programcounter_control_tb.jump_in[6] top.programcounter_control_tb.jump_in[5] top.programcounter_control_tb.jump_in[4] top.programcounter_control_tb.jump_in[3] top.programcounter_control_tb.jump_in[2] top.programcounter_control_tb.jump_in[1] top.programcounter_control_tb.jump_in[0]
+@28
+top.programcounter_control_tb.pc_control.br_enable
+@22
+#{top.programcounter_control_tb.br_in_s[6:0]} top.programcounter_control_tb.br_in_s[6] top.programcounter_control_tb.br_in_s[5] top.programcounter_control_tb.br_in_s[4] top.programcounter_control_tb.br_in_s[3] top.programcounter_control_tb.br_in_s[2] top.programcounter_control_tb.br_in_s[1] top.programcounter_control_tb.br_in_s[0]
+#{top.programcounter_control_tb.data_out[7:0]} top.programcounter_control_tb.data_out[6] top.programcounter_control_tb.data_out[5] top.programcounter_control_tb.data_out[4] top.programcounter_control_tb.data_out[3] top.programcounter_control_tb.data_out[2] top.programcounter_control_tb.data_out[1] top.programcounter_control_tb.data_out[0]
 [pattern_trace] 1
 [pattern_trace] 0

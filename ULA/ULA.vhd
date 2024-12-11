@@ -17,15 +17,20 @@ use IEEE.numeric_std.all;
 
 entity ULA is
     port(
-        A, B: in unsigned(15 downto 0);
-        opcode: in unsigned(2 downto 0);
-        Result: out unsigned(15 downto 0);
-        Zero, Carry: out std_logic
+        A, B        : in unsigned(15 downto 0);
+        opcode      : in unsigned(2 downto 0);
+        Result      : out unsigned(15 downto 0);
+        flags_wr_en : in std_logic;
+        Zero        : out std_logic;
+        Carry       : out std_logic
     );
 end entity;
 
 architecture func of ULA is
     signal extendedA, extendedB, resultSoma, resultSub, resultAnd, resultXor, resultTmp, resultLSL, resultLSR: unsigned(16 downto 0);
+
+    signal zero_s : std_logic := '0';
+    signal carry_s : std_logic := '0';
 
     begin
 
@@ -60,9 +65,12 @@ architecture func of ULA is
     Result <= resultTmp(15 downto 0);
 
     --  Definição das flags  --
-    Zero <= '1' when resultTmp = "00000000000000000" else '0';
+    zero_s <= '1' when resultTmp = "00000000000000000" else '0';
 
-    Carry <= resultSoma(16) when opcode = "000" else
-              resultSub(16) when opcode = "001" else '0';
+    carry_s <= resultSoma(16) when opcode = "000" else
+                resultSub(16) when opcode = "001" else '0';
+
+    Zero <= zero_s when flags_wr_en = '1' else '0';
+    Carry <= carry_s when flags_wr_en = '1' else '0';
 
 end architecture;

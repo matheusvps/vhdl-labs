@@ -14,7 +14,7 @@ sub:
     0011_SSSS_XXXX_XX
 
 cmp:  
-    0101_SSSS_XXXX_XX  
+    0101_SSSS_CCCC_CC  
 
 ld:  
     0110_DDDD_CCCC_CC  
@@ -38,10 +38,10 @@ jmp:
     1111_AAAA_AAAX_XX  
 
 beq:  
-    1101_AAAA_AAAX_XX  
+    1101_000_AAAA_AAA  
 
 blt:  
-    1110_AAAA_AAAX_XX  
+    1101_011_AAAA_AAA  
 
 zac:
     1100_XXXX_XXXX_XX
@@ -66,6 +66,19 @@ opcode:  operação:
 1010     mov
 1011     sw
 1100     zac  (zerar acumulador)
-1101     BEQ  (relativo) a == b ->flag zero  dá 1
-1110     BLT  (relativo) a < b  ->flag carry dá 1
+1101     BEQ  (relativo) a == b -> flag zero  dá 1
+1101     BLT  (relativo) a < b  -> flag carry dá 1
+1110     *not used*
 1111     jump (absoluto)
+
+## Condições de salto
+Instrução | br_condition
+------------------------
+   beq    |    000
+   bne    |    001
+   bgt    |    010
+   blt    |    011
+   bge    |    100
+   ble    |    101
+   bvs    |    110
+   bvc    |    111

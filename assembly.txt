@@ -1,0 +1,10 @@
+    LD R3, 5
+    LD R1, 1
+    ZAC
+
+loop:
+    MOV ACC, R3
+    SUB ACC, R1
+    MOV R2, ACC
+    CMP R2, 0
+    BLT loop

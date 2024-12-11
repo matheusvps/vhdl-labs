@@ -14,7 +14,7 @@ instructions = {
     "SW"  : "1011",
     "ZAC" : "1100",
     "BEQ" : "1101",
-    "BLT" : "1110",
+    "BLT" : "1101",
     "JMP": "1111"
 }
 
@@ -80,12 +80,18 @@ def assemble(filename):
                 op2 = bin(int(operand2))[2:].zfill(6)
 
             elif instruction in ["JMP", "BEQ", "BLT"]:  # INSTRUCTIONS WITH LABEL
-                op1 = space_split[1].strip()
-                op2 = "000"
                 if instruction == "JMP":
+                    op1 = space_split[1].strip()
                     op1 = 'A' + op1   # Absolute jump
+                    op2 = "000"
                 else:
-                    op1 = 'R' + op1   # Relative jump
+                    op1 = "000"
+                    if instruction == "BEQ":
+                        op1 = "000"
+                    elif instruction == "BLT":
+                        op1 = "011"
+                    op2 = space_split[1].strip()
+                    op2 = 'R' + op2   # Relative jump
             
             elif instruction in ["ADD", "SUB", "OR", "MULT"]: # INSTRUCTIONS WITH ONLY 1 REGISTER
                 operand1 = operands[1].strip()

@@ -7,4 +7,4 @@ ghdl -e ULA_tb
 
 ghdl -r ULA_tb --wave=ula_tb_wave.ghw
 
-gtkwave ula_tb_wave.ghw
+gtkwave ula_tb_wave.ghw -o ula_tb_wave_config.gtkw
