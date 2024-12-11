@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Wed Dec 11 19:51:15 2024
+[*] Wed Dec 11 20:08:09 2024
 [*]
 [dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\processador\processador_tb_wave.ghw"
 [dumpfile_mtime] "Wed Dec 11 19:50:33 2024"
 [dumpfile_size] 96920
 [savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\processador\processador_tb_wave_config.gtkw"
-[timestart] 9037100000
+[timestart] 9147100000
 [size] 1902 991
 [pos] -1 -1
-*-25.000017 9175000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-25.000017 9195000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.processador_tb.
 [treeopen] top.processador_tb.uut.
@@ -23,7 +23,7 @@ top.processador_tb.clk
 @24
 #{top.processador_tb.uut.estado[1:0]} top.processador_tb.uut.estado[1] top.processador_tb.uut.estado[0]
 #{top.processador_tb.uut.pc_out[6:0]} top.processador_tb.uut.pc_out[6] top.processador_tb.uut.pc_out[5] top.processador_tb.uut.pc_out[4] top.processador_tb.uut.pc_out[3] top.processador_tb.uut.pc_out[2] top.processador_tb.uut.pc_out[1] top.processador_tb.uut.pc_out[0]
-@28
+@29
 #{top.processador_tb.uut.rom_data[13:0]} top.processador_tb.uut.rom_data[13] top.processador_tb.uut.rom_data[12] top.processador_tb.uut.rom_data[11] top.processador_tb.uut.rom_data[10] top.processador_tb.uut.rom_data[9] top.processador_tb.uut.rom_data[8] top.processador_tb.uut.rom_data[7] top.processador_tb.uut.rom_data[6] top.processador_tb.uut.rom_data[5] top.processador_tb.uut.rom_data[4] top.processador_tb.uut.rom_data[3] top.processador_tb.uut.rom_data[2] top.processador_tb.uut.rom_data[1] top.processador_tb.uut.rom_data[0]
 @22
 #{top.processador_tb.uut.register_bank.register_data_0[15:0]} top.processador_tb.uut.register_bank.register_data_0[15] top.processador_tb.uut.register_bank.register_data_0[14] top.processador_tb.uut.register_bank.register_data_0[13] top.processador_tb.uut.register_bank.register_data_0[12] top.processador_tb.uut.register_bank.register_data_0[11] top.processador_tb.uut.register_bank.register_data_0[10] top.processador_tb.uut.register_bank.register_data_0[9] top.processador_tb.uut.register_bank.register_data_0[8] top.processador_tb.uut.register_bank.register_data_0[7] top.processador_tb.uut.register_bank.register_data_0[6] top.processador_tb.uut.register_bank.register_data_0[5] top.processador_tb.uut.register_bank.register_data_0[4] top.processador_tb.uut.register_bank.register_data_0[3] top.processador_tb.uut.register_bank.register_data_0[2] top.processador_tb.uut.register_bank.register_data_0[1] top.processador_tb.uut.register_bank.register_data_0[0]
