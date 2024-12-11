@@ -1,10 +1,21 @@
-    LD R3, 5
-    LD R1, 1
-    ZAC
+    LD R0, 1        # Constantes
+    LD R2, 30
+    LD R3, 0        # A
+    LD R4, 0        # B
 
 loop:
-    MOV ACC, R3
-    SUB ACC, R1
-    MOV R2, ACC
-    CMP R2, 0
+    ZAC             # C
+    ADD ACC, R3
+    ADD ACC, R4
+    MOV R4, ACC
+
+    ZAC             # D
+    ADD ACC, R3
+    ADD ACC, R0
+    MOV R3, ACC
+
+    CMP R2          # E
     BLT loop
+
+    MOV ACC, R4     # F
+    MOV R5, ACC

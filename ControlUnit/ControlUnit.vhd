@@ -35,8 +35,11 @@ begin
     immediate <= "0000000000" & instruction(5 downto 0);
 
     -- Extrai os registrador de origem e destino
-    -- MODIFICAR AQUI: RETIRAR CONDICIONAL MULTIPLA PARA MOV
-    reg_code <= instruction(9 downto 6);
+    reg_code <= instruction(9 downto 6) when opcode /= "1010" else -- Not a MOV
+                instruction(9 downto 6) when instruction(9 downto 6) /= "1111" -- Not a MOV to ACC
+                else instruction(5 downto 2); -- MOV to ACC
+    
+    dst_reg <= instruction(9 downto 6); -- Registrador de destino
 
     -- Detecta se a instrução é um Jump
     jump_enable <= '1' when opcode = "1111" else '0';
@@ -63,7 +66,7 @@ begin
 
     -- Habilita a escrita no banco de registradores
     reg_wr_en <= '1' when opcode = "0110" -- LD 
-                       OR opcode = "1010" -- MOV 
+                       OR (opcode = "1010" AND dst_reg /= "1111") -- MOV ACC -> REG
                      else '0';
 
     -- Habilita a escrita no acumulador
@@ -78,7 +81,7 @@ begin
 
     -- Sobrescreve o acumulador
     accum_ovwr_en <= '1' when (opcode = "1010" and dst_reg = "1111") -- MOV to ACC
-                           OR (opcode = "0101") -- CMP
+                        --    OR (opcode = "0101") -- CMP
                          else '0';
     
     -- Habilita a escrita das flags

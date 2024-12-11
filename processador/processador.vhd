@@ -198,8 +198,8 @@ begin
     );
 
     ula_1: ULA port map(
-        A           => UNSIGNED(data_r_s),
-        B           => UNSIGNED(accum_out),
+        A           => UNSIGNED(accum_out),
+        B           => UNSIGNED(data_r_s),
         opcode      => UNSIGNED(sel_op_ula_s),
         Result      => ula_out,
         flags_wr_en => flags_wr_en_s,
@@ -220,7 +220,7 @@ begin
     data_wr_mux <= accum_out when sel_mux_regs_s = '1' else imm;
 
     -- Accumulator data input
-    accum_in <= imm when accum_ovwr_en_s = '1' else STD_LOGIC_VECTOR(ula_out);
+    accum_in <= data_r_s when accum_ovwr_en_s = '1' else STD_LOGIC_VECTOR(ula_out);
 
 end architecture;
 

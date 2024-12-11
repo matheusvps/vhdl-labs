@@ -32,6 +32,8 @@ architecture behavior of ProgramCounter_Control is
     signal data_in_pc : unsigned(6 downto 0) := (others => '0');
     signal relative_address : unsigned(7 downto 0) := (others => '0');
     signal wr_enable_s : std_logic := '0';
+    signal bne_cond : std_logic := '0';
+    signal bgt_cond : std_logic := '0';
     begin
     PC: ProgramCounter 
         port map(
@@ -41,6 +43,10 @@ architecture behavior of ProgramCounter_Control is
             data_out => data_out_s
         );
 
+    -- Infere condições de branch
+    bne_cond <= not beq_cond;
+    bgt_cond <= not blt_cond;
+
     -- Adiciona o endereço relativo ao endereço atual (faz a extensão do sinal de 7 para 8 bits)
     relative_address <= ('0' & data_out_s) + ('0' & br_in);
 
@@ -48,13 +54,15 @@ architecture behavior of ProgramCounter_Control is
     -- Instrução de JUMP tem prioridade sobre BRANCH
     data_in_pc <= jump_in when jump_enable = '1' else
                   relative_address(6 downto 0) when (br_enable = '1'  and (
-                        (br_condition = "000" and beq_cond = '1') or
-                        (br_condition = "011" and blt_cond = '1')
+                        (br_condition = "000" and beq_cond = '1') or  -- BEQ
+                        (br_condition = "001" and bne_cond = '1') or  -- BEQ
+                        (br_condition = "010" and bgt_cond = '1') or  -- BLT
+                        (br_condition = "011" and blt_cond = '1')  -- BLT
                   ))
                   else pc_plus_1; 
 
     -- Habilita a escrita no PC
-    wr_enable_s <= jump_enable or br_enable or wr_enable;
+    wr_enable_s <= wr_enable;
 
     pc_plus_1 <= data_out_s + 1;
     data_out <= data_out_s;

@@ -65,12 +65,26 @@ architecture func of ULA is
     Result <= resultTmp(15 downto 0);
 
     --  Definição das flags  --
-    zero_s <= '1' when resultTmp = "00000000000000000" else '0';
+    process(flags_wr_en, resultTmp, resultSoma, resultSub, opcode) 
+    begin
+        if flags_wr_en = '1' then
+            if resultTmp = "00000000000000000" then
+                zero_s <= '1';
+            else
+                zero_s <= '0';
+            end if;
+            
+            if opcode = "000" AND resultSoma(16) = '1' then
+                carry_s <= '1';
+            elsif opcode = "001" AND resultSub(16) = '1' then
+                carry_s <= '1';
+            else
+                carry_s <= '0';
+            end if;
+        end if;
+    end process;
 
-    carry_s <= resultSoma(16) when opcode = "000" else
-                resultSub(16) when opcode = "001" else '0';
-
-    Zero <= zero_s when flags_wr_en = '1' else '0';
-    Carry <= carry_s when flags_wr_en = '1' else '0';
+    Zero <= zero_s;
+    Carry <= carry_s;
 
 end architecture;

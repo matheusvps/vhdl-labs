@@ -14,6 +14,8 @@ instructions = {
     "SW"  : "1011",
     "ZAC" : "1100",
     "BEQ" : "1101",
+    "BNE" : "1101",
+    "BGT" : "1101",
     "BLT" : "1101",
     "JMP": "1111"
 }
@@ -79,7 +81,7 @@ def assemble(filename):
                 operand2 = operands[1].strip()
                 op2 = bin(int(operand2))[2:].zfill(6)
 
-            elif instruction in ["JMP", "BEQ", "BLT"]:  # INSTRUCTIONS WITH LABEL
+            elif instruction in ["JMP", "BEQ", "BNE", "BGT", "BLT"]:  # INSTRUCTIONS WITH LABEL
                 if instruction == "JMP":
                     op1 = space_split[1].strip()
                     op1 = 'A' + op1   # Absolute jump
@@ -88,6 +90,10 @@ def assemble(filename):
                     op1 = "000"
                     if instruction == "BEQ":
                         op1 = "000"
+                    elif instruction == "BNE":
+                        op1 = "001"
+                    elif instruction == "BGT":
+                        op1 = "010"
                     elif instruction == "BLT":
                         op1 = "011"
                     op2 = space_split[1].strip()
@@ -105,13 +111,26 @@ def assemble(filename):
                 op1 = "0000"
                 op2 = "000000"
             
-            elif instruction in ["MOV", "CMP"]: # INSTRUCTIONS WITH 2 OPERANDS
-                # MODIFICAR POIS POR AGORA SÓ LIDA COM ACUMULADOR->REGISTRADOR
-                operand1 = operands[0].strip()
-                op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
-                op2 = "1111"
-                op2 = op2 + "00"
+            elif instruction in ["MOV"]: # INSTRUCTIONS WITH 2 OPERANDS
+                operand0 = operands[0].strip()
+                operand1 = operands[1].strip()
+                if operand1 == 'ACC':  # MOV ACC -> R
+                    op1 = bin(int(operand0.split('R')[1]))[2:].zfill(4)
+                    op2 = "1111" + "00"
+                elif operand0 == 'ACC':  # MOV R -> ACC
+                    op1 = "1111"
+                    op2 = bin(int(operand1.split('R')[1]))[2:].zfill(4) + "00"
+                elif instruction == "CMP":
+                    op1 = bin(int(operand0.split('R')[1]))[2:].zfill(4)
+                    op2 = bin(int(operand1))[2:].zfill(6)
+                else:  # MOV R -> R
+                    op1 = bin(int(operand0.split('R')[1]))[2:].zfill(4)
+                    op2 = bin(int(operand1.split('R')[1]))[2:].zfill(4) + "00"
             
+            elif instruction in ["CMP"]:
+                operand0 = operands[0].strip()
+                op1 = bin(int(operand0.split('R')[1]))[2:].zfill(4)
+                op2 = "000000"
             else:
                 print("Instruction not defined in ISA")
                 sys.exit(1)
@@ -135,11 +154,12 @@ def assemble(filename):
     return rom_code
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python assembler.py <filename>")
-        sys.exit(1)
+    # if len(sys.argv) != 2:
+    #     print("Usage: python assembler.py <filename>")
+    #     sys.exit(1)
 
-    filename = sys.argv[1]
+    # filename = sys.argv[1]
+    filename = "assembly.txt"
     rom_code = assemble(filename)
     for line in rom_code:
         print(line)
