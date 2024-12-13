@@ -30,7 +30,7 @@ architecture behavior of ProgramCounter_Control is
     signal pc_plus_1  : unsigned(6 downto 0) := (others => '0');
     signal data_out_s : unsigned(6 downto 0) := (others => '0');
     signal data_in_pc : unsigned(6 downto 0) := (others => '0');
-    signal relative_address : unsigned(7 downto 0) := (others => '0');
+    signal relative_address : unsigned(6 downto 0) := (others => '0');
     signal wr_enable_s : std_logic := '0';
     signal bne_cond : std_logic := '0';
     signal bgt_cond : std_logic := '0';
@@ -48,12 +48,13 @@ architecture behavior of ProgramCounter_Control is
     bgt_cond <= not blt_cond;
 
     -- Adiciona o endereço relativo ao endereço atual (faz a extensão do sinal de 7 para 8 bits)
-    relative_address <= ('0' & data_out_s) + ('0' & br_in);
+    -- relative_address <= ('0' & data_out_s) + ('0' & br_in);
+    relative_address <= data_out_s + br_in;
 
     -- MUX para selecionar endereço de branch (relativo) ou de jump (absoluto)
     -- Instrução de JUMP tem prioridade sobre BRANCH
     data_in_pc <= jump_in when jump_enable = '1' else
-                  relative_address(6 downto 0) when (br_enable = '1'  and (
+                  relative_address when (br_enable = '1'  and (
                         (br_condition = "000" and beq_cond = '1') or  -- BEQ
                         (br_condition = "001" and bne_cond = '1') or  -- BEQ
                         (br_condition = "010" and bgt_cond = '1') or  -- BLT
