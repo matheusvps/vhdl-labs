@@ -20,7 +20,6 @@ entity ULA is
         A, B        : in unsigned(15 downto 0);
         opcode      : in unsigned(2 downto 0);
         Result      : out unsigned(15 downto 0);
-        flags_wr_en : in std_logic;
         Zero        : out std_logic;
         Carry       : out std_logic
     );
@@ -65,24 +64,17 @@ architecture func of ULA is
     Result <= resultTmp(15 downto 0);
 
     --  Definição das flags  --
-    process(flags_wr_en, resultTmp, resultSoma, resultSub, opcode) 
+    process(resultTmp, resultTmp) 
     begin
-        if flags_wr_en = '1' then
-            if resultTmp = "00000000000000000" then
-                zero_s <= '1';
-            else
-                zero_s <= '0';
-            end if;
-            
-            if opcode = "000" AND resultSoma(16) = '1' then
-                carry_s <= '1';
-            elsif opcode = "001" AND resultSub(16) = '1' then
-                carry_s <= '1';
-            else
-                carry_s <= '0';
-            end if;
+        if resultTmp = "00000000000000000" then
+            zero_s <= '1';
+        else
+            zero_s <= '0';
         end if;
-    end process;
+        
+        carry_s <= resultTmp(16);
+
+        end process;
 
     Zero <= zero_s;
     Carry <= carry_s;

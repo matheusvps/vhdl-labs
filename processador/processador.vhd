@@ -69,11 +69,20 @@ end entity;
             data_r  : out STD_LOGIC_VECTOR(15 downto 0) -- Dado lido do registrador selecionado
         );
     end component;
+    component Register1bit is
+        port (
+            clock    : in STD_LOGIC;
+            rst      : in STD_LOGIC;
+            wr_en    : in STD_LOGIC;
+            data_in  : in STD_LOGIC;
+            data_out : out STD_LOGIC
+        );
+    end component;
     component Register16Bits is
         port ( 
-            clock    : in std_logic;
-            rst      : in std_logic;
-            wr_en    : in std_logic;
+            clock    : in STD_LOGIC;
+            rst      : in STD_LOGIC;
+            wr_en    : in STD_LOGIC;
             data_in  : in STD_LOGIC_VECTOR(15 downto 0);
             data_out : out STD_LOGIC_VECTOR(15 downto 0)
         );
@@ -83,7 +92,6 @@ end entity;
             A, B        : in unsigned(15 downto 0);
             opcode      : in unsigned(2 downto 0);
             Result      : out unsigned(15 downto 0);
-            flags_wr_en : in std_logic;
             Zero        : out std_logic;
             Carry       : out std_logic
         );
@@ -133,6 +141,10 @@ end entity;
     signal carry   : std_logic := '0';
     signal zero    : std_logic := '0';
 
+    -- Sinais dos registradores de flags
+    signal zero_flag : std_logic := '0';
+    signal carry_flag : std_logic := '0';
+
 
 begin
     state_machine: StateMachine port map(
@@ -149,8 +161,8 @@ begin
         br_enable    => br_enable_s,
         br_in        => br_address_s,
         br_condition => br_condition_s,
-        beq_cond     => zero,
-        blt_cond     => carry,
+        beq_cond     => zero_flag,
+        blt_cond     => carry_flag,
         data_out     => pc_out
     );
 
@@ -202,9 +214,24 @@ begin
         B           => UNSIGNED(data_r_s),
         opcode      => UNSIGNED(sel_op_ula_s),
         Result      => ula_out,
-        flags_wr_en => flags_wr_en_s,
         Zero        => zero,
         Carry       => carry
+    );
+
+    flag_zero: Register1bit port map(
+        clock    => clk,
+        rst      => rst,
+        wr_en    => flags_wr_en_s,
+        data_in  => zero,
+        data_out => zero_flag
+    );
+
+    flag_carry: Register1bit port map(
+        clock    => clk,
+        rst      => rst,
+        wr_en    => flags_wr_en_s,
+        data_in  => carry,
+        data_out => carry_flag
     );
 
     -- Enables do FETCH

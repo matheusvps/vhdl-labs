@@ -9,7 +9,6 @@ architecture func of ULA_tb is
         A, B        : in unsigned(15 downto 0);
         opcode      : in unsigned(2 downto 0);
         Result      : out unsigned(15 downto 0);
-        flags_wr_en : in std_logic;
         Zero        : out std_logic;
         Carry       : out std_logic
     );
@@ -17,7 +16,6 @@ architecture func of ULA_tb is
 
     signal A, B, Result: unsigned(15 downto 0) := "0000000000000000";
     signal opcode: unsigned(2 downto 0) := "000";
-    signal flags_wr_en: std_logic := '0';
     signal Zero, Carry: std_logic := '0';
 
     begin
@@ -25,7 +23,6 @@ architecture func of ULA_tb is
                           B => B,
                           Result => Result,
                           opcode => opcode,
-                          flags_wr_en => flags_wr_en,
                           Zero => Zero,
                           Carry => Carry);
     

@@ -85,7 +85,11 @@ begin
                          else '0';
     
     -- Habilita a escrita das flags
-    flags_wr_en <= '1' when opcode = "0101" else -- CMP
-                   '0';
+    flags_wr_en <= '1' when opcode = "0101" -- CMP
+                         or opcode = "0001" -- ADD
+                         or opcode = "0011" -- SUB
+                         or opcode = "1000" -- OR
+                         or opcode = "1001" -- MULT
+                       else '0';
 
 end architecture;
