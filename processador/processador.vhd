@@ -38,24 +38,34 @@ end entity;
             dado     : out std_logic_vector(13 downto 0) -- 14 bits para cada dado
         );
     end component;
+    component RAM is
+        port (
+            clk      : in STD_LOGIC;
+            endereco : in unsigned(6 downto 0);
+            wr_en    : in STD_LOGIC;
+            dado_in  : in unsigned(15 downto 0);
+            dado_out : out unsigned(15 downto 0) 
+        );
+    end component;
     component ControlUnit is
         port (
             clk           : in std_logic;
-            instruction   : in std_logic_vector(13 downto 0); -- Instrução da ROM (14 bits)
-            jump_enable   : out std_logic;                    -- Sinal para habilitar o Jump
-            jump_address  : out unsigned(6 downto 0);         -- Endereço absoluto para Jump
+            instruction   : in std_logic_vector(13 downto 0);  -- Instrução da ROM (14 bits)
+            jump_enable   : out std_logic;                     -- Sinal para habilitar o Jump
+            jump_address  : out unsigned(6 downto 0);          -- Endereço absoluto para Jump
             br_enable     : out std_logic;                     -- Sinal para habilitar o Branch
             br_address    : out unsigned(6 downto 0);          -- Endereço relativo para Branch
-            br_condition  : out std_logic_vector(2 downto 0);         -- Condição para Branch
-            sel_op_ula    : out unsigned(2 downto 0);         -- Operação da ULA
-            sel_mux_regs  : out std_logic;                    -- Seleção do mux de registradores entre Accumulator e Immediate
-            reg_wr_en     : out std_logic;                    -- Habilita a escrita no banco de registradoresW
-            accum_en      : out std_logic;                    -- Habilita a escrita no acumulador
+            br_condition  : out std_logic_vector(2 downto 0);  -- Condição para Branch
+            sel_op_ula    : out unsigned(2 downto 0);          -- Operação da ULA
+            sel_mux_regs  : out std_logic;                     -- Seleção do mux de registradores entre Accumulator e Immediate
+            reg_wr_en     : out std_logic;                     -- Habilita a escrita no banco de registradoresW
+            accum_en      : out std_logic;                     -- Habilita a escrita no acumulador
             accum_ovwr_en : out std_logic;                     -- Habilita a sobrescrita no acumulador
             rst_accum     : out std_logic;                     -- Reseta o acumulador
             flags_wr_en   : out std_logic;                     -- Habilita a escrita das flags
             immediate     : out std_logic_vector(15 downto 0); -- Valor constante
-            reg_code      : out std_logic_vector(3 downto 0)  -- Registrador de destino
+            ram_wr_en     : out std_logic;                     -- Habilita a escrita na RAM
+            reg_code      : out std_logic_vector(3 downto 0)   -- Registrador de destino
         );
     end component;
     component RegisterBank is
@@ -122,9 +132,8 @@ end entity;
     signal rst_accum_s     : std_logic := '0';
     signal flags_wr_en_s   : std_logic := '0';
     signal imm             : std_logic_vector(15 downto 0) := (others => '0');
+    signal ram_wr_en_s     : std_logic := '0';
     signal reg_code_s      : std_logic_vector(3 downto 0) := (others => '0');
-    -- signal reg_wr_s : std_logic_vector(3 downto 0) := (others => '0');
-    -- signal reg_r_s : std_logic_vector(3 downto 0) := (others => '0');
     
     -- Sinais do Banco de Registradores
     signal reg_en      : std_logic := '0';
@@ -172,6 +181,14 @@ begin
         dado     => rom_data
     );
 
+    ram_1: RAM port map(
+        clk      => clk,
+        endereco => data_r_s (6 downto 0),
+        wr_en    => ram_wr_en_s,
+        dado_in  => accum_out,
+        dado_out => 
+    );
+
     control_unit: ControlUnit port map(
         clk           => clk,
         instruction   => rom_data,
@@ -188,6 +205,7 @@ begin
         rst_accum     => rst_accum_s,
         flags_wr_en   => flags_wr_en_s,
         immediate     => imm,
+        ram_wr_en     => ram_wr_en_s,
         reg_code      => reg_code_s
     );
 

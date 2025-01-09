@@ -10,7 +10,7 @@ entity ControlUnit is
         jump_address  : out unsigned(6 downto 0);          -- Endereço absoluto para Jump
         br_enable     : out std_logic;                     -- Sinal para habilitar o Branch
         br_address    : out unsigned(6 downto 0);          -- Endereço relativo para Branch
-        br_condition  : out std_logic_vector(2 downto 0);         -- Condição para Branch
+        br_condition  : out std_logic_vector(2 downto 0);  -- Condição para Branch
         sel_op_ula    : out unsigned(2 downto 0);          -- Operação da ULA
         sel_mux_regs  : out std_logic;                     -- Seleção do mux de registradores entre Accumulator e Immediate
         reg_wr_en     : out std_logic;                     -- Habilita a escrita no banco de registradoresW
@@ -19,6 +19,7 @@ entity ControlUnit is
         rst_accum     : out std_logic;                     -- Reseta o acumulador
         flags_wr_en   : out std_logic;                     -- Habilita a escrita das flags
         immediate     : out std_logic_vector(15 downto 0); -- Valor constante
+        ram_wr_en     : out std_logic;                     -- Habilita a escrita na RAM
         reg_code      : out std_logic_vector(3 downto 0)   -- Registrador de destino
     );
 end entity;
