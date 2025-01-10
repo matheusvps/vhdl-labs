@@ -41,31 +41,33 @@ end entity;
     component RAM is
         port (
             clk      : in STD_LOGIC;
-            endereco : in unsigned(6 downto 0);
+            endereco : in STD_LOGIC_VECTOR(6 downto 0);
             wr_en    : in STD_LOGIC;
-            dado_in  : in unsigned(15 downto 0);
-            dado_out : out unsigned(15 downto 0) 
+            dado_in  : in STD_LOGIC_VECTOR(15 downto 0);
+            dado_out : out STD_LOGIC_VECTOR(15 downto 0) 
         );
     end component;
     component ControlUnit is
         port (
             clk           : in std_logic;
-            instruction   : in std_logic_vector(13 downto 0);  -- Instrução da ROM (14 bits)
+            instruction   : in STD_LOGIC_VECTOR(13 downto 0);  -- Instrução da ROM (14 bits)
             jump_enable   : out std_logic;                     -- Sinal para habilitar o Jump
             jump_address  : out unsigned(6 downto 0);          -- Endereço absoluto para Jump
             br_enable     : out std_logic;                     -- Sinal para habilitar o Branch
             br_address    : out unsigned(6 downto 0);          -- Endereço relativo para Branch
-            br_condition  : out std_logic_vector(2 downto 0);  -- Condição para Branch
+            br_condition  : out STD_LOGIC_VECTOR(2 downto 0);  -- Condição para Branch
             sel_op_ula    : out unsigned(2 downto 0);          -- Operação da ULA
             sel_mux_regs  : out std_logic;                     -- Seleção do mux de registradores entre Accumulator e Immediate
             reg_wr_en     : out std_logic;                     -- Habilita a escrita no banco de registradoresW
             accum_en      : out std_logic;                     -- Habilita a escrita no acumulador
             accum_ovwr_en : out std_logic;                     -- Habilita a sobrescrita no acumulador
+            accum_mux_sel : out std_logic;                     -- Seleção do mux de entrada do acumulador
             rst_accum     : out std_logic;                     -- Reseta o acumulador
             flags_wr_en   : out std_logic;                     -- Habilita a escrita das flags
-            immediate     : out std_logic_vector(15 downto 0); -- Valor constante
+            immediate     : out STD_LOGIC_VECTOR(15 downto 0); -- Valor constante
             ram_wr_en     : out std_logic;                     -- Habilita a escrita na RAM
-            reg_code      : out std_logic_vector(3 downto 0)   -- Registrador de destino
+            ram_rd_en     : out std_logic;                     -- Habilita a leitura na RAM
+            reg_code      : out STD_LOGIC_VECTOR(3 downto 0)   -- Registrador de destino
         );
     end component;
     component RegisterBank is
@@ -116,34 +118,39 @@ end entity;
     signal pc_out       : unsigned(6 downto 0) := (others => '0');
     
     -- Sinais da ROM
-    signal rom_data : std_logic_vector(13 downto 0) := (others => '0');
+    signal rom_data : STD_LOGIC_VECTOR(13 downto 0) := (others => '0');
+
+    -- Sinais da RAM
+    signal ram_out : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
     -- Sinais da Control Unit
     signal jump_enable_s   : std_logic := '0';
     signal jump_address_s  : unsigned(6 downto 0) := (others => '0');
     signal br_enable_s     : std_logic := '0';
     signal br_address_s    : unsigned(6 downto 0) := (others => '0');
-    signal br_condition_s  : std_logic_vector(2 downto 0) := (others => '0');
+    signal br_condition_s  : STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
     signal sel_op_ula_s    : unsigned(2 downto 0) := (others => '0');
     signal sel_mux_regs_s  : std_logic := '0';
     signal reg_wr_en_s     : std_logic := '0';
     signal accum_en_s      : std_logic := '0';
     signal accum_ovwr_en_s : std_logic := '0';
+    signal accum_mux_sel_s : std_logic := '0';
     signal rst_accum_s     : std_logic := '0';
     signal flags_wr_en_s   : std_logic := '0';
-    signal imm             : std_logic_vector(15 downto 0) := (others => '0');
+    signal imm             : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     signal ram_wr_en_s     : std_logic := '0';
-    signal reg_code_s      : std_logic_vector(3 downto 0) := (others => '0');
+    signal ram_rd_en_s     : std_logic := '0';
+    signal reg_code_s      : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
     
     -- Sinais do Banco de Registradores
     signal reg_en      : std_logic := '0';
-    signal data_wr_mux : std_logic_vector(15 downto 0) := (others => '0');
-    signal data_r_s    : std_logic_vector(15 downto 0) := (others => '0');
+    signal data_wr_mux : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal data_r_s    : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
     -- Sinais do Acumulador
     signal accum_en  : std_logic := '0';
-    signal accum_out : std_logic_vector(15 downto 0) := (others => '0');
-    signal accum_in  : std_logic_vector(15 downto 0) := (others => '0');
+    signal accum_out : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+    signal accum_in  : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
     -- Sinais da ULA
     signal ula_out : unsigned(15 downto 0) := (others => '0');
@@ -186,7 +193,7 @@ begin
         endereco => data_r_s (6 downto 0),
         wr_en    => ram_wr_en_s,
         dado_in  => accum_out,
-        dado_out => 
+        dado_out => ram_out
     );
 
     control_unit: ControlUnit port map(
@@ -202,10 +209,12 @@ begin
         reg_wr_en     => reg_wr_en_s,
         accum_en      => accum_en_s,
         accum_ovwr_en => accum_ovwr_en_s,
+        accum_mux_sel => accum_mux_sel_s,
         rst_accum     => rst_accum_s,
         flags_wr_en   => flags_wr_en_s,
         immediate     => imm,
         ram_wr_en     => ram_wr_en_s,
+        ram_rd_en     => ram_rd_en_s,
         reg_code      => reg_code_s
     );
 
@@ -265,7 +274,8 @@ begin
     data_wr_mux <= accum_out when sel_mux_regs_s = '1' else imm;
 
     -- Accumulator data input
-    accum_in <= data_r_s when accum_ovwr_en_s = '1' else STD_LOGIC_VECTOR(ula_out);
+    accum_in <= data_r_s when accum_ovwr_en_s = '1' else
+                 ram_out when ram_rd_en_s = '1' else STD_LOGIC_VECTOR(ula_out);
 
 end architecture;
 

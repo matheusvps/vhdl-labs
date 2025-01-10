@@ -12,14 +12,16 @@ entity ControlUnit is
         br_address    : out unsigned(6 downto 0);          -- Endereço relativo para Branch
         br_condition  : out std_logic_vector(2 downto 0);  -- Condição para Branch
         sel_op_ula    : out unsigned(2 downto 0);          -- Operação da ULA
-        sel_mux_regs  : out std_logic;                     -- Seleção do mux de registradores entre Accumulator e Immediate
+        sel_mux_regs  : out std_logic;                     -- Seleção do mux de registradores entre Accumulator, Immediate e RAM
         reg_wr_en     : out std_logic;                     -- Habilita a escrita no banco de registradoresW
         accum_en      : out std_logic;                     -- Habilita a escrita no acumulador
         accum_ovwr_en : out std_logic;                     -- Habilita a sobrescrita no acumulador
+        accum_mux_sel : out std_logic;                     -- Seleção do mux de entrada do acumulador
         rst_accum     : out std_logic;                     -- Reseta o acumulador
         flags_wr_en   : out std_logic;                     -- Habilita a escrita das flags
         immediate     : out std_logic_vector(15 downto 0); -- Valor constante
         ram_wr_en     : out std_logic;                     -- Habilita a escrita na RAM
+        ram_rd_en     : out std_logic;                     -- Habilita a leitura na RAM
         reg_code      : out std_logic_vector(3 downto 0)   -- Registrador de destino
     );
 end entity;
@@ -74,6 +76,7 @@ begin
     accum_en <= '1' when (opcode = "1010" AND dst_reg = "1111")  -- MOV to ACC
                       OR opcode = "0001" -- ADD
                       OR opcode = "0011" -- SUB
+                      OR opcode = "0111" -- LW
                     else '0';
     
     -- Reseta o acumulador
@@ -85,6 +88,9 @@ begin
                         --    OR (opcode = "0101") -- CMP
                          else '0';
     
+    accum_mux_sel <= '1' when (opcode = "1010" and dst_reg = "1111") -- MOV to ACC
+                         else '0'; -- LW (RAM to ACC)
+    
     -- Habilita a escrita das flags
     flags_wr_en <= '1' when opcode = "0101" -- CMP
                          or opcode = "0001" -- ADD
@@ -92,5 +98,14 @@ begin
                          or opcode = "1000" -- OR
                          or opcode = "1001" -- MULT
                        else '0';
+    
+    -- Habilita a leitura na RAM
+    ram_rd_en <= '1' when opcode = "0111" -- LW
+                    else '0';
+
+    -- Habilita a escrita na RAM
+    ram_wr_en <= '1' when opcode = "1011" -- SW
+                     else '0';
+
 
 end architecture;

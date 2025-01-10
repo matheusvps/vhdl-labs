@@ -3,27 +3,27 @@
 
 ## Opcodes e instruções
 
-| Opcode | Instrução |
-|--------|-----------|
-|  0000  |    nop    |   
-|  0001  |    add    |  
-|  0010  | *not used*|     
-|  0011  |    sub    |   
-|  0100  | *not used*|
+| Opcode | Instrução  |
+|--------|------------|
+|  0000  |    nop     |   
+|  0001  |    add     |  
+|  0010  | *not used* |     
+|  0011  |    sub     |   
+|  0100  | *not used* |
 |  0101  |    cmp (compara acumulador com registrador)|
-|  0110  |    ld     |
-|  0111  |    lw     |
-|  1000  |    or     |
-|  1001  |    mult   |
-|  1010  |    mov    |
-|  1011  |    sw     |
+|  0110  |    ld      |
+|  0111  |    lw      |
+|  1000  |    or      |
+|  1001  |    mult    |
+|  1010  |    mov     |
+|  1011  |    sw      |
 |  1100  |    zac  (zerar acumulador)|
 |  1101  |    BEQ (a == b -> flag zero  dá 1)|
 |  1101  |    BNE (a != b -> flag zero  dá 0)|
 |  1101  |    BGT (a > b  -> flag carry dá 0)|
 |  1101  |    BLT (a < b  -> flag carry dá 1)|
-|  1110  | *not used*|
-|  1111  |    jump   |
+|  1110  | *not used* |
+|  1111  |    jump    |
 
 
 ## Codificação
