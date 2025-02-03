@@ -1,9 +1,25 @@
-    LD R0, 23
-    LD R1, 8
-    ZAC
-    ADD ACC, R0
-    SW R0, (R1)
+    # Algoritmo para o crivo de Erastótenes
+    
+    LD R0, 63  # Max number to check for
+    LD R1, 1   # Number and address (1 on 1, 2 on 2, etc.)
+    LD R3, 1   # Constant
 
-    ZAC
-    LW ACC, (R1)
-    MOV R2, ACC
+loop1:  # Adiciona todos os números na memória
+    SW R1, (R1)  # Salva o R1 no endereço de memória R2
+
+    MOV ACC, R1
+    ADD ACC, R3
+    MOV R1, ACC # Incrementa o número/endereço de memória
+
+    MOV ACC, R1
+    CMP R0
+    BLT loop1 # Se R1 < R0, volta para loop1
+
+    LD R1, 1   # Number and address (1 on 1, 2 on 2, etc.)
+    LD R2, 2   # Prime number
+    LD R3, 1   # Constant
+
+
+loop2:  # Remove os múltiplos dos números sequencialmente
+    
+
