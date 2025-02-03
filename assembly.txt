@@ -1,7 +1,7 @@
     # Algoritmo para o crivo de Erastótenes
     
     LD R0, 63  # Max number to check for
-    LD R1, 1   # Number and address (1 on 1, 2 on 2, etc.)
+    LD R1, 2   # Number and address (2 on 2, 3 on 3, etc.)
     LD R3, 1   # Constant
 
 loop1:  # Adiciona todos os números na memória
@@ -15,11 +15,47 @@ loop1:  # Adiciona todos os números na memória
     CMP R0
     BLT loop1 # Se R1 < R0, volta para loop1
 
-    LD R1, 1   # Number and address (1 on 1, 2 on 2, etc.)
+
+    LD R1, 2   # Number and address (2 on 2, 3 on 3, etc.)
     LD R2, 2   # Prime number
     LD R3, 1   # Constant
 
 
 loop2:  # Remove os múltiplos dos números sequencialmente
+    MOV ACC, R1
+    ADD ACC, R2
+    MOV R1, ACC  # Determina o número a ser removido
     
+    MOV ACC, R3
+    SW R3, (R1)  # Remove o número (1 não é primo, logo usamos como flag)
+
+    MOV ACC, R1
+    CMP R0
+    BLT loop2 # Se R1 < R0, volta para loop2
+
+    MOV ACC, R2
+    MOV R7, ACC # "Cospe" os números primos em R7
+
+loop3:  # Encontra o próximo número primo
+    MOV ACC, R2
+    ADD ACC, R3
+    MOV R2, ACC  # Incrementa o endereço de memória
+
+    MOV ACC, R2
+    MOV R1, ACC   # Reseta o número
+    
+    LW ACC, (R2)  # Carrega o número da memória em ACC
+    CMP R3
+    BNE loop2  # Se R1 != R3, volta para loop2
+
+    MOV ACC, R2
+    CMP R0
+    BLT loop3 # Se R2 < R0, volta para loop3
+    
+
+
+
+
+
+
 
