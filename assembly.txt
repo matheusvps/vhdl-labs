@@ -5,7 +5,7 @@
     LD R3, 1   # Constant
 
 loop1:  # Adiciona todos os números na memória
-    SW R1, (R1)  # Salva o R1 no endereço de memória R2
+    SW R1, (R1)  # Salva o R1 no endereço de memória R1
 
     MOV ACC, R1
     ADD ACC, R3

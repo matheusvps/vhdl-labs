@@ -16,7 +16,7 @@ architecture a_ROM of ROM is
       0 => B"0110_0000_111111",  -- LD R0, 63  # Max number to check for
       1 => B"0110_0001_000010",  -- LD R1, 2   # Number and address (2 on 2, 3 on 3, etc.)
       2 => B"0110_0011_000001",  -- LD R3, 1   # Constant
-      3 => B"1011_0001_000100",  -- SW R1, (R1)  # Salva o R1 no endereÃ§o de memÃ³ria R2
+      3 => B"1011_0001_000100",  -- SW R1, (R1)  # Salva o R1 no endereÃ§o de memÃ³ria R1
       4 => B"1010_1111_000100",  -- MOV ACC, R1
       5 => B"0001_0011_000000",  -- ADD ACC, R3
       6 => B"1010_0001_111100",  -- MOV R1, ACC # Incrementa o nÃºmero/endereÃ§o de memÃ³ria
