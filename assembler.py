@@ -106,12 +106,10 @@ def assemble(filename):
             
             elif instruction in ["LW", "SW"]: # INSTRUCTIONS WITH MEMORY ACCESS
                 operand1 = operands[0].strip()  # Value to be saved/loaded from memory
-                operand2 = operands[1].strip()[1:-1]  # Memory address
-                op1 = bin(int(operand2.split('R')[1]))[2:].zfill(4)
-                try:
-                    op2 = bin(int(operand1.split('R')[1]))[2:].zfill(4) + "00"
-                except IndexError:
-                    op2 = "000000"
+                # operand2 = operands[1].strip()[1:-1]  # Memory address
+                # op1 = bin(int(operand2.split('R')[1]))[2:].zfill(4)
+                op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
+                op2 = "000000"
                 
             elif instruction in ["ZAC", "NOP"]: # INSTRUCTIONS WITHOUT OPERANDS
                 op1 = "0000"

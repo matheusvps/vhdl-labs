@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity RAM is
    port( 
          clk      : in STD_LOGIC;
-         endereco : in STD_LOGIC_VECTOR(6 downto 0);
+         endereco : in STD_LOGIC_VECTOR(15 downto 0);
          wr_en    : in STD_LOGIC;
          dado_in  : in STD_LOGIC_VECTOR(15 downto 0);
          dado_out : out STD_LOGIC_VECTOR(15 downto 0) 

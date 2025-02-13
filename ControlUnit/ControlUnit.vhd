@@ -85,7 +85,7 @@ begin
 
     -- Sobrescreve o acumulador
     accum_ovwr_en <= '1' when (opcode = "1010" and dst_reg = "1111") -- MOV to ACC
-                        --    OR (opcode = "0101") -- CMP
+                           OR (opcode = "0111") -- LW
                          else '0';
     
     accum_mux_sel <= '1' when (opcode = "1010" and dst_reg = "1111") -- MOV to ACC

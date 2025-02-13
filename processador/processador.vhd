@@ -12,14 +12,16 @@ end entity;
   architecture a_processador of processador is
     component StateMachine is
         port (
-            clk    : in std_logic;
-            rst    : in std_logic;
-            estado : out unsigned(1 downto 0)  -- Estado atual
+            clk       : in std_logic;
+            rst       : in std_logic;
+            exception : in std_logic; -- Sinal de exceção para halt
+            estado    : out unsigned(1 downto 0)  -- Estado atual
         );
     end component;
     component ProgramCounter_Control is
         port (
             clk          : in std_logic;
+            rst          : in std_logic;
             wr_enable    : in  STD_LOGIC;
             jump_enable  : in std_logic;
             jump_in      : in unsigned(6 downto 0);
@@ -29,6 +31,13 @@ end entity;
             beq_cond     : in std_logic;            
             blt_cond     : in std_logic;            
             data_out     : out unsigned(6 downto 0)
+        );
+    end component;
+    component MMU is
+        port (
+            endereco_in  : in std_logic_vector(15 downto 0);
+            endereco_out : out std_logic_vector(15 downto 0);
+            exception    : out std_logic
         );
     end component;
     component ROM is
@@ -41,7 +50,7 @@ end entity;
     component RAM is
         port (
             clk      : in STD_LOGIC;
-            endereco : in STD_LOGIC_VECTOR(6 downto 0);
+            endereco : in STD_LOGIC_VECTOR(15 downto 0);
             wr_en    : in STD_LOGIC;
             dado_in  : in STD_LOGIC_VECTOR(15 downto 0);
             dado_out : out STD_LOGIC_VECTOR(15 downto 0) 
@@ -111,12 +120,16 @@ end entity;
 
     
     -- Sinais da State Machine
-    signal estado : unsigned(1 downto 0) := (others => '0');
+    signal estado    : unsigned(1 downto 0) := (others => '0');
     
     -- Sinais do PC
     signal pc_en        : std_logic := '0';
     signal pc_out       : unsigned(6 downto 0) := (others => '0');
     
+    -- Sinais da MMU
+    signal exception : std_logic := '0';
+    signal endereco  : std_logic_vector(15 downto 0) := (others => '0');
+
     -- Sinais da ROM
     signal rom_data : STD_LOGIC_VECTOR(13 downto 0) := (others => '0');
 
@@ -164,13 +177,15 @@ end entity;
 
 begin
     state_machine: StateMachine port map(
-        clk    => clk,
-        rst    => rst,
-        estado => estado
+        clk       => clk,
+        rst       => rst,
+        exception => exception,
+        estado    => estado
     );
 
     pc: ProgramCounter_Control port map(
         clk          => clk,
+        rst          => rst,
         wr_enable    => pc_en,
         jump_enable  => jump_enable_s,
         jump_in      => jump_address_s,
@@ -182,6 +197,12 @@ begin
         data_out     => pc_out
     );
 
+    mmu_1: MMU port map(
+        endereco_in  => data_r_s,
+        endereco_out => endereco,
+        exception    => exception
+    );
+
     rom_1: ROM port map(
         clk      => clk,
         endereco => pc_out,
@@ -190,7 +211,7 @@ begin
 
     ram_1: RAM port map(
         clk      => clk,
-        endereco => data_r_s (6 downto 0),
+        endereco => endereco,
         wr_en    => ram_wr_en_s,
         dado_in  => accum_out,
         dado_out => ram_out
@@ -262,8 +283,8 @@ begin
     );
 
     -- Enables do FETCH
-    pc_en <= '1' when estado = "10" else '0';
-
+    pc_en <= '1' when (estado = "10" and exception = '0') else '0';
+    
     -- Enables do DECODE
 
     -- Enables do EXECUTE
@@ -274,8 +295,9 @@ begin
     data_wr_mux <= accum_out when sel_mux_regs_s = '1' else imm;
 
     -- Accumulator data input
-    accum_in <= data_r_s when accum_ovwr_en_s = '1' else
-                 ram_out when ram_rd_en_s = '1' else STD_LOGIC_VECTOR(ula_out);
+    accum_in <= data_r_s when (accum_ovwr_en_s = '1' and ram_rd_en_s = '0') else
+                 ram_out when ram_rd_en_s = '1' 
+                    else STD_LOGIC_VECTOR(ula_out);
 
 end architecture;
 

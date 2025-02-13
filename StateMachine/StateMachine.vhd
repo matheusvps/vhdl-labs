@@ -4,9 +4,10 @@ use ieee.numeric_std.all;
 
 entity StateMachine is
    port(
-      clk    : in std_logic;
-      rst    : in std_logic;
-      estado : out unsigned(1 downto 0)  -- Estado atual
+      clk       : in std_logic;
+      rst       : in std_logic;
+      exception : in std_logic; -- Sinal de exceção para halt
+      estado    : out unsigned(1 downto 0)  -- Estado atual
    );
 end entity;
 
@@ -23,7 +24,9 @@ begin
       if rst = '1' then
          estado_s <= "00";               -- Reset: volta ao estado 0
       elsif rising_edge(clk) then
-         if estado_s = "10" then         -- Se no estado 2
+         if exception = '1' then         -- Se houver exceção
+            estado_s <= "01";            -- Para a máquina no estado Fetch
+         elsif estado_s = "10" then         -- Se no estado 2
             estado_s <= "00";            -- Próximo estado é 0
          else
             estado_s <= estado_s + 1;    -- Avança para o próximo estado

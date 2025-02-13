@@ -37,11 +37,11 @@ MSB b13 |---------------| b0 LSB
 |    sub    |  0011_SSSS_XXXX_XX |
 |    cmp    |  0101_SSSS_XXXX_XX |  
 |    ld     |  0110_DDDD_CCCC_CC |  
-|    lw     |  0111_DDDD_SSSS_XX |  
+|    lw     |  0111_XXXX_SSSS_XX |
 |    or     |  1000_SSSS_XXXX_XX |  
 |    mult   |  1001_SSSS_XXXX_XX |  
 |    mov    |  1010_DDDD_SSSS_XX |  
-|    sw     |  1011_SSSS_XXXX_XX |  
+|    sw     |  1011_XXXX_SSSS_XX |  
 |    zac    |  1100_XXXX_XXXX_XX |
 |    beq    |  1101_000_AAAA_AAA |  
 |    bne    |  1101_001_AAAA_AAA |  
@@ -54,6 +54,8 @@ MSB b13 |---------------| b0 LSB
 > S: registrador fonte
 > C: constante
 > A: endereço
+
+_Obs: LW e SW -> Operações de memória usando registrador SSSS como endereço e o Acumulador como _
 
 ## Condições de salto
 | Instrução | br_condition |

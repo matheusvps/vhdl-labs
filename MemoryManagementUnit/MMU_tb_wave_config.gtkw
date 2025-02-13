@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Wed Feb 12 22:43:37 2025
+[*]
+[dumpfile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\MemoryManagementUnit\MMU_tb_wave.ghw"
+[dumpfile_mtime] "Wed Feb 12 22:42:44 2025"
+[dumpfile_size] 2103
+[savefile] "D:\Joule\Documents\Jhony\Universidade\UTFPR\2024.2\Arquitetura de Computadores\Labs\MemoryManagementUnit\MMU_tb_wave_config.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-24.161102 15470000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.mmu_tb.
+[sst_width] 197
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 153
+@28
+top.mmu_tb.clk
+@29
+[color] 1
+top.mmu_tb.exception
+@24
+#{top.mmu_tb.endereco_in[15:0]} top.mmu_tb.endereco_in[15] top.mmu_tb.endereco_in[14] top.mmu_tb.endereco_in[13] top.mmu_tb.endereco_in[12] top.mmu_tb.endereco_in[11] top.mmu_tb.endereco_in[10] top.mmu_tb.endereco_in[9] top.mmu_tb.endereco_in[8] top.mmu_tb.endereco_in[7] top.mmu_tb.endereco_in[6] top.mmu_tb.endereco_in[5] top.mmu_tb.endereco_in[4] top.mmu_tb.endereco_in[3] top.mmu_tb.endereco_in[2] top.mmu_tb.endereco_in[1] top.mmu_tb.endereco_in[0]
+#{top.mmu_tb.endereco_out[15:0]} top.mmu_tb.endereco_out[15] top.mmu_tb.endereco_out[14] top.mmu_tb.endereco_out[13] top.mmu_tb.endereco_out[12] top.mmu_tb.endereco_out[11] top.mmu_tb.endereco_out[10] top.mmu_tb.endereco_out[9] top.mmu_tb.endereco_out[8] top.mmu_tb.endereco_out[7] top.mmu_tb.endereco_out[6] top.mmu_tb.endereco_out[5] top.mmu_tb.endereco_out[4] top.mmu_tb.endereco_out[3] top.mmu_tb.endereco_out[2] top.mmu_tb.endereco_out[1] top.mmu_tb.endereco_out[0]
+[pattern_trace] 1
+[pattern_trace] 0

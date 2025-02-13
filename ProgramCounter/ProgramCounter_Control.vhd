@@ -5,6 +5,7 @@ use IEEE.numeric_std.all;
 entity ProgramCounter_Control is
     port(
         clk          : in std_logic;
+        rst          : in std_logic;
         wr_enable    : in std_logic;
         jump_enable  : in std_logic;
         jump_in      : in unsigned(6 downto 0);
@@ -21,6 +22,7 @@ architecture behavior of ProgramCounter_Control is
     component ProgramCounter is
         port(
             clk       : in std_logic;
+            rst       : in std_logic;
             wr_enable : in std_logic;
             data_in   : in unsigned(6 downto 0);
             data_out  : out unsigned(6 downto 0)
@@ -38,6 +40,7 @@ architecture behavior of ProgramCounter_Control is
     PC: ProgramCounter 
         port map(
             clk => clk, 
+            rst => rst,
             wr_enable => wr_enable_s, 
             data_in => data_in_pc, 
             data_out => data_out_s
