@@ -57,7 +57,7 @@ MSB b13 |---------------| b0 LSB
 > C: constante
 > A: endereço
 
-_Obs: LW e SW -> Operações de memória usando registrador SSSS como endereço e o Acumulador como _
+*Obs: LW e SW -> Operações de memória usando registrador SSSS como endereço e o Acumulador como*
 
 ## Condições de salto
 | Instrução | br_condition |
