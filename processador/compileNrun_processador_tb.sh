@@ -18,5 +18,5 @@ ghdl -e StateMachine ProgramCounter ProgramCounter_Control MMU ROM RAM ControlUn
 
 ghdl -r processador_tb --wave=processador_tb_wave.ghw
 
-gtkwave processador_tb_wave.ghw -o processador_tb_wave_config_submit.gtkw
+gtkwave processador_tb_wave.ghw -o processador_tb_wave_config.gtkw
 read  -n 1

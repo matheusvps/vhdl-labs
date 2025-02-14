@@ -1,15 +1,42 @@
     
-    LD R0, 60
-    LD R1, 2
+    LD R0, 30
+    LD R1, 1
     LD R2, 20
 
     MOV ACC, R0  # Seta 120 para R0
     ADD ACC, R0
+    ADD ACC, R0
+    ADD ACC, R0
     MOV R0, ACC
+
+    LD R3, -3   # Testa o BMI
+    LD R4, 0
+    ZAC
+    MOV ACC, R3
+    CMP R4
+    BMI loop0
+
+    LD R3, 1   # Não roda
+
+preloop:
+    LD R3, -3   # Testa o BLS-Lower
+    LD R4, -2
+    ZAC
+    MOV ACC, R3
+    CMP R4
+    BLS loop1
+
+loop0:
+    LD R3, -3   # Testa o BLS-Same
+    LD R4, -3
+    ZAC
+    MOV ACC, R3
+    CMP R4
+    BLS preloop
 
 loop1:
     MOV ACC, R0
-    SW R1  # Salva o valor do Acumulador no endereço de memória de R1
+    SW R0  # Salva o valor do Acumulador no endereço de memória de R1
 
     MOV ACC, R2  # Atualiza o índice
     SUB ACC, R1

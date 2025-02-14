@@ -47,6 +47,8 @@ MSB b13 |---------------| b0 LSB
 |    bne    |  1101_001_AAAA_AAA |  
 |    bgt    |  1101_010_AAAA_AAA |  
 |    blt    |  1101_011_AAAA_AAA | 
+|    bmi    |  1101_100_AAAA_AAA | 
+|    bls    |  1101_101_AAAA_AAA | 
 |    jmp    |  1111_AAAA_AAAX_XX |  
 
 > X: irrelevante
@@ -64,7 +66,7 @@ _Obs: LW e SW -> Operações de memória usando registrador SSSS como endereço 
 |    bne    |    001       |
 |    bgt    |    010       |
 |    blt    |    011       |
-|    ---    |    100       |
-|    ---    |    101       |
+|    bmi    |    100       |
+|    bls    |    101       |
 |    ---    |    110       |
 |    ---    |    111       |

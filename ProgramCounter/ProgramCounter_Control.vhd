@@ -12,8 +12,9 @@ entity ProgramCounter_Control is
         br_enable    : in std_logic;
         br_in        : in unsigned(6 downto 0);
         br_condition : in std_logic_vector(2 downto 0);
-        beq_cond     : in std_logic;             -- Resultado da comparação de igualdade da ULA
-        blt_cond     : in std_logic;             -- Resultado da comparação de igualdade da ULA
+        beq_cond     : in std_logic;             -- Flag Zero da ULA
+        blt_cond     : in std_logic;             -- Carry Flag da ULA
+        bmi_cond     : in std_logic;             -- Negative Flag da ULA
         data_out     : out unsigned(6 downto 0)
     );
 end entity;
@@ -36,6 +37,8 @@ architecture behavior of ProgramCounter_Control is
     signal wr_enable_s : std_logic := '0';
     signal bne_cond : std_logic := '0';
     signal bgt_cond : std_logic := '0';
+    signal bls_cond : std_logic := '0';
+
     begin
     PC: ProgramCounter 
         port map(
@@ -49,6 +52,7 @@ architecture behavior of ProgramCounter_Control is
     -- Infere condições de branch
     bne_cond <= not beq_cond;
     bgt_cond <= not blt_cond;
+    bls_cond <= beq_cond or blt_cond;
 
     -- Adiciona o endereço relativo ao endereço atual (faz a extensão do sinal de 7 para 8 bits)
     -- relative_address <= ('0' & data_out_s) + ('0' & br_in);
@@ -59,9 +63,11 @@ architecture behavior of ProgramCounter_Control is
     data_in_pc <= jump_in when jump_enable = '1' else
                   relative_address when (br_enable = '1'  and (
                         (br_condition = "000" and beq_cond = '1') or  -- BEQ
-                        (br_condition = "001" and bne_cond = '1') or  -- BEQ
-                        (br_condition = "010" and bgt_cond = '1') or  -- BLT
-                        (br_condition = "011" and blt_cond = '1')  -- BLT
+                        (br_condition = "001" and bne_cond = '1') or  -- BNE
+                        (br_condition = "010" and bgt_cond = '1') or  -- BGT
+                        (br_condition = "011" and blt_cond = '1') or  -- BLT
+                        (br_condition = "100" and bmi_cond = '1') or  -- BMI
+                        (br_condition = "101" and bls_cond = '1')  -- BLS
                   ))
                   else pc_plus_1; 
 

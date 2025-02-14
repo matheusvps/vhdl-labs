@@ -21,7 +21,8 @@ entity ULA is
         opcode      : in unsigned(2 downto 0);
         Result      : out unsigned(15 downto 0);
         Zero        : out std_logic;
-        Carry       : out std_logic
+        Carry       : out std_logic;
+        Negative    : out std_logic
     );
 end entity;
 
@@ -30,6 +31,7 @@ architecture func of ULA is
 
     signal zero_s : std_logic := '0';
     signal carry_s : std_logic := '0';
+    signal negative_s : std_logic := '0';
 
     begin
 
@@ -73,10 +75,12 @@ architecture func of ULA is
         end if;
         
         carry_s <= resultTmp(16);
+        negative_s <= resultTmp(15);
 
         end process;
 
     Zero <= zero_s;
     Carry <= carry_s;
+    Negative <= negative_s;
 
 end architecture;

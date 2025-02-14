@@ -17,6 +17,8 @@ instructions = {
     "BNE" : "1101",
     "BGT" : "1101",
     "BLT" : "1101",
+    "BMI" : "1101",
+    "BLS" : "1101",
     "JMP": "1111"
 }
 
@@ -26,7 +28,7 @@ def invert_bits(bin_string):
     return ''.join(['1' if bit == '0' else '0' for bit in bin_string])
 
 def get_twos_complement(value, bits=7):
-    if value > 0:
+    if value >= 0:
         bin_string = bin(value)[2:].zfill(bits)
         return bin_string
     value = abs(value)
@@ -79,9 +81,10 @@ def assemble(filename):
                 operand1 = operands[0].strip()
                 op1 = bin(int(operand1.split('R')[1]))[2:].zfill(4)
                 operand2 = operands[1].strip()
-                op2 = bin(int(operand2))[2:].zfill(6)
+                num = int(operand2)
+                op2 = get_twos_complement(num, 6)
 
-            elif instruction in ["JMP", "BEQ", "BNE", "BGT", "BLT"]:  # INSTRUCTIONS WITH LABEL
+            elif instruction in ["JMP", "BEQ", "BNE", "BGT", "BLT", "BMI", "BLS"]:  # INSTRUCTIONS WITH LABEL
                 if instruction == "JMP":
                     op1 = space_split[1].strip()
                     op1 = 'A' + op1   # Absolute jump
@@ -96,6 +99,10 @@ def assemble(filename):
                         op1 = "010"
                     elif instruction == "BLT":
                         op1 = "011"
+                    elif instruction == "BMI":
+                        op1 = "100"
+                    elif instruction == "BLS":
+                        op1 = "101"
                     op2 = space_split[1].strip()
                     op2 = 'R' + op2   # Relative jump
             
@@ -165,6 +172,34 @@ if __name__ == "__main__":
     # filename = sys.argv[1]
     filename = "assembly.txt"
     rom_code = assemble(filename)
-    for line in rom_code:
-        print(line)
+
+    filename = "ROM/ROM.vhd"
+    with open(filename, "w") as f:
+        f.write("library IEEE;\n")
+        f.write("use IEEE.STD_LOGIC_1164.ALL;\n")
+        f.write("use IEEE.numeric_std.ALL;\n")
+        f.write("\n")
+        f.write("entity ROM is\n")
+        f.write("    port (\n")
+        f.write("           clk      : in STD_LOGIC;\n")
+        f.write("           endereco : in unsigned(6 downto 0);\n")
+        f.write("           dado     : out STD_LOGIC_VECTOR(13 downto 0)\n")
+        f.write("    );\n")
+        f.write("end entity;\n")
+        f.write("\n")
+        f.write("architecture a_ROM of ROM is\n")
+        f.write("    type mem is array (0 to 127) of std_logic_vector(13 downto 0); -- 128 posições de 14 bits\n")
+        f.write("    constant conteudo_rom : mem := (\n")
+        for line in rom_code:
+            f.write(f"\t{line}\n")
+        f.write("   others => (others => '0')\n")
+        f.write("    );\n")
+        f.write("begin\n")
+        f.write("   process(clk)\n")
+        f.write("   begin\n")
+        f.write("       if rising_edge(clk) then\n")
+        f.write("           dado <= conteudo_rom(to_integer(endereco));\n")
+        f.write("       end if;\n")
+        f.write("   end process;\n")
+        f.write("end architecture;\n")
     

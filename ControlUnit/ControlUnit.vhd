@@ -35,7 +35,8 @@ begin
     opcode <= instruction(13 downto 10);               -- Extrai o opcode da instrução
     
     -- Extract Immediate from ROM data
-    immediate <= "0000000000" & instruction(5 downto 0);
+    -- immediate <= "0000000000" & instruction(5 downto 0);
+    immediate <= (15 downto 6 => instruction(5)) & instruction(5 downto 0);
 
     -- Extrai os registrador de origem e destino
     reg_code <= instruction(9 downto 6) when opcode /= "1010" else -- Not a MOV

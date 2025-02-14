@@ -29,12 +29,15 @@ end entity;
             br_in        : in unsigned(6 downto 0);
             br_condition : in std_logic_vector(2 downto 0);
             beq_cond     : in std_logic;            
-            blt_cond     : in std_logic;            
+            blt_cond     : in std_logic;          
+            bmi_cond     : in std_logic;  
             data_out     : out unsigned(6 downto 0)
         );
     end component;
     component MMU is
         port (
+            ram_read_en  : in std_logic;
+            ram_write_en : in std_logic;
             endereco_in  : in std_logic_vector(15 downto 0);
             endereco_out : out std_logic_vector(15 downto 0);
             exception    : out std_logic
@@ -114,7 +117,8 @@ end entity;
             opcode      : in unsigned(2 downto 0);
             Result      : out unsigned(15 downto 0);
             Zero        : out std_logic;
-            Carry       : out std_logic
+            Carry       : out std_logic;
+            Negative    : out std_logic
         );
     end component;
 
@@ -166,9 +170,10 @@ end entity;
     signal accum_in  : STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
     
     -- Sinais da ULA
-    signal ula_out : unsigned(15 downto 0) := (others => '0');
-    signal carry   : std_logic := '0';
-    signal zero    : std_logic := '0';
+    signal ula_out  : unsigned(15 downto 0) := (others => '0');
+    signal carry    : std_logic := '0';
+    signal zero     : std_logic := '0';
+    signal negative : std_logic := '0';
 
     -- Sinais dos registradores de flags
     signal zero_flag : std_logic := '0';
@@ -194,10 +199,13 @@ begin
         br_condition => br_condition_s,
         beq_cond     => zero_flag,
         blt_cond     => carry_flag,
+        bmi_cond     => negative,
         data_out     => pc_out
     );
 
     mmu_1: MMU port map(
+        ram_read_en  => ram_rd_en_s,
+        ram_write_en => ram_wr_en_s,
         endereco_in  => data_r_s,
         endereco_out => endereco,
         exception    => exception
@@ -263,7 +271,8 @@ begin
         opcode      => UNSIGNED(sel_op_ula_s),
         Result      => ula_out,
         Zero        => zero,
-        Carry       => carry
+        Carry       => carry,
+        Negative    => negative
     );
 
     flag_zero: Register1bit port map(
